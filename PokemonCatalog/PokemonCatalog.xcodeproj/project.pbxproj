@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F625B3AF25D3215A00CF1001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3AE25D3215A00CF1001 /* AppDelegate.swift */; };
-		F625B3B125D3215A00CF1001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3B025D3215A00CF1001 /* SceneDelegate.swift */; };
 		F625B3B325D3215A00CF1001 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3B225D3215A00CF1001 /* ViewController.swift */; };
-		F625B3B625D3215A00CF1001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F625B3B425D3215A00CF1001 /* Main.storyboard */; };
 		F625B3B825D3215B00CF1001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F625B3B725D3215B00CF1001 /* Assets.xcassets */; };
 		F625B3BB25D3215B00CF1001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F625B3B925D3215B00CF1001 /* LaunchScreen.storyboard */; };
 		F625B3C625D3215B00CF1001 /* PokemonCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3C525D3215B00CF1001 /* PokemonCatalogTests.swift */; };
@@ -37,9 +35,7 @@
 /* Begin PBXFileReference section */
 		F625B3AB25D3215A00CF1001 /* PokemonCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F625B3AE25D3215A00CF1001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F625B3B025D3215A00CF1001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F625B3B225D3215A00CF1001 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F625B3B525D3215A00CF1001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F625B3B725D3215B00CF1001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F625B3BA25D3215B00CF1001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F625B3BC25D3215B00CF1001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,9 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				F625B3AE25D3215A00CF1001 /* AppDelegate.swift */,
-				F625B3B025D3215A00CF1001 /* SceneDelegate.swift */,
 				F625B3B225D3215A00CF1001 /* ViewController.swift */,
-				F625B3B425D3215A00CF1001 /* Main.storyboard */,
 				F625B3B725D3215B00CF1001 /* Assets.xcassets */,
 				F625B3B925D3215B00CF1001 /* LaunchScreen.storyboard */,
 				F625B3BC25D3215B00CF1001 /* Info.plist */,
@@ -233,7 +227,6 @@
 			files = (
 				F625B3BB25D3215B00CF1001 /* LaunchScreen.storyboard in Resources */,
 				F625B3B825D3215B00CF1001 /* Assets.xcassets in Resources */,
-				F625B3B625D3215A00CF1001 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +253,6 @@
 			files = (
 				F625B3B325D3215A00CF1001 /* ViewController.swift in Sources */,
 				F625B3AF25D3215A00CF1001 /* AppDelegate.swift in Sources */,
-				F625B3B125D3215A00CF1001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +288,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F625B3B425D3215A00CF1001 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F625B3B525D3215A00CF1001 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F625B3B925D3215B00CF1001 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -438,6 +422,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PokemonCatalog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,6 +441,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PokemonCatalog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
