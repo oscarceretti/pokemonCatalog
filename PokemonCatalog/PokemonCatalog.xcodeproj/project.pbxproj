@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,10 @@
 		F62A1F9A25D334DA00302692 /* PokemonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62A1F9925D334DA00302692 /* PokemonListView.swift */; };
 		F6E5CDFC25D59FB700B2B7AA /* AppDependecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CDFB25D59FB700B2B7AA /* AppDependecies.swift */; };
 		F6E5CE0225D5A00A00B2B7AA /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */; };
+		F6E5CE0825D5AC1C00B2B7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F6E5CE0725D5AC1C00B2B7AA /* SnapKit */; };
+		F6E5CE1125D5AC5C00B2B7AA /* PokemonListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1025D5AC5C00B2B7AA /* PokemonListCollectionView.swift */; };
+		F6E5CE1625D5ACEF00B2B7AA /* PokemonListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1525D5ACEF00B2B7AA /* PokemonListCellView.swift */; };
+		F6E5CE1C25D5AF3900B2B7AA /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1B25D5AF3900B2B7AA /* Then.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,9 @@
 		F62A1F9925D334DA00302692 /* PokemonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListView.swift; sourceTree = "<group>"; };
 		F6E5CDFB25D59FB700B2B7AA /* AppDependecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependecies.swift; sourceTree = "<group>"; };
 		F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
+		F6E5CE1025D5AC5C00B2B7AA /* PokemonListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListCollectionView.swift; sourceTree = "<group>"; };
+		F6E5CE1525D5ACEF00B2B7AA /* PokemonListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListCellView.swift; sourceTree = "<group>"; };
+		F6E5CE1B25D5AF3900B2B7AA /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E5CE0825D5AC1C00B2B7AA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +144,9 @@
 		F62A1F5F25D327FD00302692 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F6E5CE1A25D5AF2900B2B7AA /* Utils */,
 				F6E5CDFA25D59FA300B2B7AA /* Structure */,
-				F62A1F9825D334B700302692 /* Views */,
+				F62A1F9825D334B700302692 /* PokemonListScene */,
 				F62A1F6425D3298D00302692 /* ViewControllers */,
 				F62A1F6325D3284A00302692 /* ViewModels */,
 				F62A1F6225D3283A00302692 /* Models */,
@@ -174,7 +183,6 @@
 		F62A1F6325D3284A00302692 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F62A1F7025D32BDC00302692 /* PokemonLIstViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -182,17 +190,19 @@
 		F62A1F6425D3298D00302692 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F625B3B225D3215A00CF1001 /* PokemonListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		F62A1F9825D334B700302692 /* Views */ = {
+		F62A1F9825D334B700302692 /* PokemonListScene */ = {
 			isa = PBXGroup;
 			children = (
+				F6E5CE0F25D5AC4300B2B7AA /* component */,
+				F62A1F7025D32BDC00302692 /* PokemonLIstViewModel.swift */,
+				F625B3B225D3215A00CF1001 /* PokemonListViewController.swift */,
 				F62A1F9925D334DA00302692 /* PokemonListView.swift */,
 			);
-			path = Views;
+			path = PokemonListScene;
 			sourceTree = "<group>";
 		};
 		F6E5CDFA25D59FA300B2B7AA /* Structure */ = {
@@ -202,6 +212,23 @@
 				F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */,
 			);
 			path = Structure;
+			sourceTree = "<group>";
+		};
+		F6E5CE0F25D5AC4300B2B7AA /* component */ = {
+			isa = PBXGroup;
+			children = (
+				F6E5CE1025D5AC5C00B2B7AA /* PokemonListCollectionView.swift */,
+				F6E5CE1525D5ACEF00B2B7AA /* PokemonListCellView.swift */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
+		F6E5CE1A25D5AF2900B2B7AA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F6E5CE1B25D5AF3900B2B7AA /* Then.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +247,9 @@
 			dependencies = (
 			);
 			name = PokemonCatalog;
+			packageProductDependencies = (
+				F6E5CE0725D5AC1C00B2B7AA /* SnapKit */,
+			);
 			productName = PokemonCatalog;
 			productReference = F625B3AB25D3215A00CF1001 /* PokemonCatalog.app */;
 			productType = "com.apple.product-type.application";
@@ -291,6 +321,9 @@
 				Base,
 			);
 			mainGroup = F625B3A225D3215A00CF1001;
+			packageReferences = (
+				F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F625B3AC25D3215A00CF1001 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,10 +370,13 @@
 				F625B3B325D3215A00CF1001 /* PokemonListViewController.swift in Sources */,
 				F62A1F7625D32D2C00302692 /* PokemonManager.swift in Sources */,
 				F6E5CDFC25D59FB700B2B7AA /* AppDependecies.swift in Sources */,
+				F6E5CE1125D5AC5C00B2B7AA /* PokemonListCollectionView.swift in Sources */,
 				F625B3AF25D3215A00CF1001 /* AppDelegate.swift in Sources */,
 				F62A1F7125D32BDC00302692 /* PokemonLIstViewModel.swift in Sources */,
 				F62A1F9A25D334DA00302692 /* PokemonListView.swift in Sources */,
+				F6E5CE1625D5ACEF00B2B7AA /* PokemonListCellView.swift in Sources */,
 				F62A1F6625D32ABD00302692 /* PokemonList.swift in Sources */,
+				F6E5CE1C25D5AF3900B2B7AA /* Then.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +703,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F6E5CE0725D5AC1C00B2B7AA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F625B3A325D3215A00CF1001 /* Project object */;
 }
