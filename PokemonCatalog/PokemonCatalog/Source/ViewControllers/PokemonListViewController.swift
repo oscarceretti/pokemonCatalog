@@ -9,8 +9,16 @@ import UIKit
 
 class PokemonListViewController: UIViewController {
 
-    private var pokemonListViewModel: PokemonListViewModel!
+    private var pokemonListViewModel: PokemonListViewModel
+   
+    init(pokemonListViewModel: PokemonListViewModel) {
+        self.pokemonListViewModel = pokemonListViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         callToViewModelForUpdateUIUpdate()
@@ -18,7 +26,7 @@ class PokemonListViewController: UIViewController {
     }
 
     func callToViewModelForUpdateUIUpdate() {
-        self.pokemonListViewModel = PokemonListViewModel()
+        self.pokemonListViewModel.callFuncToGetPokemonList()
     }
 
 }

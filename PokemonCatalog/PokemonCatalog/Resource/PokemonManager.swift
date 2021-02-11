@@ -6,8 +6,14 @@
 //
 
 import Foundation
+protocol HasPokemonManager {
+    var pokemonManager: PokemonManagerProtocol { get }
+}
 
-class APIService: NSObject {
+protocol PokemonManagerProtocol {
+    func getPokemonList(completion: @escaping (PokemonList) -> ())
+}
+class PokemonManager: NSObject, PokemonManagerProtocol{
     private let sourceURL = URL(string: "https://pokeapi.co/api/v2/pokemon?offset=0")
     
     func getPokemonList(completion: @escaping (PokemonList) -> ()) {
