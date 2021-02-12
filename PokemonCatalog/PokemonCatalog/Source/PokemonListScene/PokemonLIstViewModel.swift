@@ -30,7 +30,7 @@ class PokemonListViewModel: NSObject {
 
     func callFuncToGetPokemonList() {
         var offset = 0
-        self.dependecies.pokemonManager.getPokemonList(offset: self.pokeData.results.count ?? 0){ (pokemonList) in
+        self.dependecies.pokemonManager.getPokemonList(offset: self.pokeData?.results.count ?? 0){ (pokemonList) in
             self.pokeData = pokemonList
         }
         
