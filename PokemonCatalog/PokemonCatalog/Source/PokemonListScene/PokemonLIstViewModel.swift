@@ -10,10 +10,11 @@
 import Foundation
 
 class PokemonListViewModel: NSObject {
+    
     typealias Dependencies = HasPokemonManager
     let dependecies: Dependencies
     
-    private(set) var pokeData: PokemonList! {
+    private(set) var pokeData: PokemonList? {
         didSet {
             self.bindPokemonListViewModelToController()
         }
@@ -27,9 +28,9 @@ class PokemonListViewModel: NSObject {
     }
     
 
-    
     func callFuncToGetPokemonList() {
-        self.dependecies.pokemonManager.getPokemonList{ (pokemonList) in
+        var offset = 0
+        self.dependecies.pokemonManager.getPokemonList(offset: self.pokeData.results.count ?? 0){ (pokemonList) in
             self.pokeData = pokemonList
         }
         
