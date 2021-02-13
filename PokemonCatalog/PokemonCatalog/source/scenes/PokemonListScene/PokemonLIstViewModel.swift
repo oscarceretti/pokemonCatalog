@@ -33,4 +33,10 @@ class PokemonListViewModel: NSObject {
             self.pokeData = pokemonList
         }
     }
+    
+    func getPokemonDetailAsTest(urlString: String) {
+        self.dependecies.pokemonManager.getPokemonDetail(urlString: urlString) { pokemonDetail in
+            debugPrint(pokemonDetail)
+        }
+    }
 }

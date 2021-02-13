@@ -57,8 +57,8 @@ class PokemonListViewController: UIViewController {
 
 extension PokemonListViewController: PokemonListCollectionViewDelegate {
     func openDetail(urlString: String) {
-        debugPrint(urlString)
-        self.router.openPokemonDetail(from: self)
+        self.viewModel.getPokemonDetailAsTest(urlString: urlString)
+        //self.router.openPokemonDetail(from: self)
     }
     
 
