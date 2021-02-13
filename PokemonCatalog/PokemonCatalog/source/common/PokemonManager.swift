@@ -21,7 +21,7 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
         if let nextString = next {
             sourceURL = URL(string: nextString)
         }else {
-            sourceURL = URL(string: Endpoint.pokemonlist.rawValue)
+            sourceURL = URL(string: Constants.urlPath.pokemonList)
         }
         guard let url = sourceURL else { return }
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
