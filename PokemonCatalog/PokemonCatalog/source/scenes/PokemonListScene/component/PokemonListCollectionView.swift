@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 protocol PokemonListCollectionViewDelegate: class {
     func askForMore()
-    func openDetail()
+    func openDetail(urlString: String)
 }
 
 final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -96,7 +96,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
-        self.delegate?.openDetail()
+        self.delegate?.openDetail(urlString: datasource[indexPath.row].url)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

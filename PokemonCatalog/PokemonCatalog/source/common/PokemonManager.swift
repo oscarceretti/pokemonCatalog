@@ -32,7 +32,8 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                     completion(pokeData)
                 }
             }catch {
-                debugPrint("bad", error.localizedDescription)
+                // TO-DO: Handle error
+                debugPrint(error.localizedDescription)
             }
            
             

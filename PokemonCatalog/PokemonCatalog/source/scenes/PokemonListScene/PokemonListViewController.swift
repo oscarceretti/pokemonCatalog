@@ -56,9 +56,12 @@ class PokemonListViewController: UIViewController {
 }
 
 extension PokemonListViewController: PokemonListCollectionViewDelegate {
-    func openDetail() {
+    func openDetail(urlString: String) {
+        debugPrint(urlString)
         self.router.openPokemonDetail(from: self)
     }
+    
+
     
     func askForMore() {
         self.viewModel.callFuncToGetPokemonList()
