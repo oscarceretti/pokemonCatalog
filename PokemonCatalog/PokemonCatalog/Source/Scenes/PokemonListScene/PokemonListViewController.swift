@@ -10,11 +10,12 @@ import SnapKit
 class PokemonListViewController: UIViewController {
     
     private var viewModel: PokemonListViewModel
-    
+    private var router: PokemonListRouter
     private var pokemonList = PokemonListCollectionView(datasource: [])
     
-    init(viewModel: PokemonListViewModel) {
+    init(viewModel: PokemonListViewModel, router: PokemonListRouter) {
         self.viewModel = viewModel
+        self.router = router
         super.init(nibName: nil, bundle: nil)
         self.view.addSubview(pokemonList)
         pokemonList.snp.makeConstraints { (make) in
@@ -29,6 +30,7 @@ class PokemonListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         callToViewModelForUIUpdate()
+        pokemonList.delegate = self
         self.viewModel.callFuncToGetPokemonList()
     }
     
@@ -45,7 +47,7 @@ class PokemonListViewController: UIViewController {
     func updateDatasource() {
         if let pokedata = self.viewModel.pokeData {
             DispatchQueue.main.async {
-                self.pokemonList.datasource = pokedata.results
+                self.pokemonList.datasource.append(contentsOf: pokedata.results)
                 self.pokemonList.collectionView?.reloadData()
             }
         }
@@ -53,3 +55,14 @@ class PokemonListViewController: UIViewController {
     
 }
 
+extension PokemonListViewController: PokemonListCollectionViewDelegate {
+    func openDetail() {
+        self.router.openPokemonDetail(from: self)
+    }
+    
+    func askForMore() {
+        self.viewModel.callFuncToGetPokemonList()
+    }
+    
+    
+}

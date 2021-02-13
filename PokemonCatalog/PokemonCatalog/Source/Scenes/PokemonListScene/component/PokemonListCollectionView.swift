@@ -9,7 +9,10 @@ import Foundation
 import Foundation
 import UIKit
 import SnapKit
-
+protocol PokemonListCollectionViewDelegate: class {
+    func askForMore()
+    func openDetail()
+}
 
 final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -17,6 +20,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     
     var datasource: [Pokemon] = []
     var indexPath : IndexPath? = nil
+    weak var delegate: PokemonListCollectionViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -87,5 +91,16 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
            
         }
         return cell
+    }
+    
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == datasource.count - 1 {
+            self.delegate?.askForMore()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
+        self.delegate?.openDetail()
     }
 }

@@ -11,6 +11,9 @@ import UIKit
 protocol PokemonListSceneFactory {
     func buildPokemonListScene() -> PokemonListViewController
 }
+protocol PokemonDetailSceneFactory {
+    func buildPokemonDetailScene() -> PokemonDetailViewController
+}
 final class CompositionRoot {
     let dependencies = AppDependencies()
 }
@@ -18,7 +21,17 @@ final class CompositionRoot {
 extension CompositionRoot: PokemonListSceneFactory {
     func buildPokemonListScene() -> PokemonListViewController {
         let viewModel = PokemonListViewModel(dependecies: dependencies)
-        let vc = PokemonListViewController(viewModel: viewModel)
+        let router = PokemonListRouter(sceneFactory: self)
+        let vc = PokemonListViewController(viewModel: viewModel, router: router)
+        return vc
+    }
+}
+
+extension CompositionRoot: PokemonDetailSceneFactory {
+    func buildPokemonDetailScene() -> PokemonDetailViewController {
+        let viewModel = PokemonDetailViewModel(dependecies: dependencies)
+        let router = PokemonDetailRouter(sceneFactory: self)
+        let vc = PokemonDetailViewController(viewModel: viewModel, router: router)
         return vc
     }
 }

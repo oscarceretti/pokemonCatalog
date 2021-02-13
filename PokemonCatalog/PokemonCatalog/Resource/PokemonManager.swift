@@ -11,13 +11,18 @@ protocol HasPokemonManager {
 }
 
 protocol PokemonManagerProtocol {
-    func getPokemonList(offset: Int,completion: @escaping (PokemonList) -> ())
+    func getPokemonList(next: String?,completion: @escaping (PokemonList) -> ())
 }
 class PokemonManager: NSObject, PokemonManagerProtocol{
     
     
-    func getPokemonList(offset: Int,completion: @escaping (PokemonList) -> ()) {
-        let sourceURL = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=100&offset=\(offset)")
+    func getPokemonList(next: String?,completion: @escaping (PokemonList) -> ()) {
+        var sourceURL: URL?
+        if let nextString = next {
+            sourceURL = URL(string: nextString)
+        }else {
+            sourceURL = URL(string: Endpoint.pokemonlist.rawValue)
+        }
         guard let url = sourceURL else { return }
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
             do {
