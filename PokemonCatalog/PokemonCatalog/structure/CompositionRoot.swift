@@ -12,7 +12,7 @@ protocol PokemonListSceneFactory {
     func buildPokemonListScene() -> PokemonListViewController
 }
 protocol PokemonDetailSceneFactory {
-    func buildPokemonDetailScene() -> PokemonDetailViewController
+    func buildPokemonDetailScene(urlString: String) -> PokemonDetailViewController
 }
 final class CompositionRoot {
     let dependencies = AppDependencies()
@@ -28,8 +28,8 @@ extension CompositionRoot: PokemonListSceneFactory {
 }
 
 extension CompositionRoot: PokemonDetailSceneFactory {
-    func buildPokemonDetailScene() -> PokemonDetailViewController {
-        let viewModel = PokemonDetailViewModel(dependecies: dependencies)
+    func buildPokemonDetailScene(urlString: String) -> PokemonDetailViewController {
+        let viewModel = PokemonDetailViewModel(dependecies: dependencies, urlString: urlString)
         let router = PokemonDetailRouter(sceneFactory: self)
         let vc = PokemonDetailViewController(viewModel: viewModel, router: router)
         return vc

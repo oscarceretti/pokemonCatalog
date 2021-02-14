@@ -29,14 +29,9 @@ class PokemonListViewModel: NSObject {
     
 
     func callFuncToGetPokemonList() {
-        self.dependecies.pokemonManager.getPokemonList(next: self.pokeData?.next){ (pokemonList) in
+        self.dependecies.pokemonManager.getPokemonList(next: self.pokeData?.next){ (pokemonList,error) in
             self.pokeData = pokemonList
         }
     }
     
-    func getPokemonDetailAsTest(urlString: String) {
-        self.dependecies.pokemonManager.getPokemonDetail(urlString: urlString) { pokemonDetail in
-            debugPrint(pokemonDetail)
-        }
-    }
 }

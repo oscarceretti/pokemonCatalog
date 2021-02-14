@@ -34,9 +34,6 @@ class PokemonListViewController: UIViewController {
         self.viewModel.callFuncToGetPokemonList()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        callToViewModelForUIUpdate()
-    }
     
     func callToViewModelForUIUpdate() {
         self.viewModel.bindPokemonListViewModelToController = {
@@ -57,8 +54,7 @@ class PokemonListViewController: UIViewController {
 
 extension PokemonListViewController: PokemonListCollectionViewDelegate {
     func openDetail(urlString: String) {
-        self.viewModel.getPokemonDetailAsTest(urlString: urlString)
-        //self.router.openPokemonDetail(from: self)
+        self.router.openPokemonDetail(from: self, pokemonUrl: urlString)
     }
     
 

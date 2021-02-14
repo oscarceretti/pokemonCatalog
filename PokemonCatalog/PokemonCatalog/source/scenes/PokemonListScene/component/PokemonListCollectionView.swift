@@ -67,7 +67,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // indentation
-        return UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
 
@@ -80,7 +80,9 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
         if indexPath.item < (datasource.count) {
             cell.pokemonImage.image = UIImage()
             let imageURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 1).png")
-            if let url = imageURL {  cell.pokemonImage.load(url: url) }
+            if let url = imageURL {
+                cell.pokemonImage.load(url: url)
+            }
             cell.pokemonName.text = self.datasource[indexPath.item].name
            
         }
@@ -100,7 +102,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.size.width - 40) / 2
+        let width = (UIScreen.main.bounds.size.width - 50) / 2
         let height = width
         return CGSize(width: width, height: height)
     }

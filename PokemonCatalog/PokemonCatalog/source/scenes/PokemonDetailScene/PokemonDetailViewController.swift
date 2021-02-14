@@ -17,7 +17,7 @@ class PokemonDetailViewController: UIViewController {
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-      
+        
     }
     
     required init?(coder: NSCoder) {
@@ -26,15 +26,31 @@ class PokemonDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
-        
+        callToViewModelForUIUpdate()
+        self.viewModel.callFuncToGetPokemonDetail()
+        self.view.backgroundColor = .white
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    
+    func callToViewModelForUIUpdate() {
+        
+        self.viewModel.bindPokemonNameToController = {
+            debugPrint(self.viewModel.pokemonName)
+        }
+        
+        self.viewModel.bindPokemonImagesToController = {
+            debugPrint(self.viewModel.pokemonImages)
+        }
+        
+        self.viewModel.bindPokemonStatToController = {
+            debugPrint(self.viewModel.pokemonStat)
+        }
+        
+        self.viewModel.bindPokemonTypeToController = {
+            debugPrint(self.viewModel.pokemonType)
+        }
         
     }
-    
-
     
 }
+
