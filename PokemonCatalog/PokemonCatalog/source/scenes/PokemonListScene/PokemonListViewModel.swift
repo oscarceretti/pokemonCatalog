@@ -13,7 +13,7 @@ class PokemonListViewModel: NSObject {
     
     typealias Dependencies = HasPokemonManager
     let dependecies: Dependencies
-    
+    private var totalCount: Int = 1118
     private var pokeData: PokemonList?
     private(set) var pokeDatasource: [Pokemon]? {
         didSet {
@@ -29,8 +29,10 @@ class PokemonListViewModel: NSObject {
     
 
     func callFuncToGetPokemonList() {
+        guard totalCount > 0 else { return }
         self.dependecies.pokemonManager.getPokemonList(next: self.pokeData?.next){ (pokemonList,error) in
             self.pokeData = pokemonList
+            self.totalCount -= pokemonList?.results.count ?? 0
             self.pokeDatasource = pokemonList?.results
         }
     }

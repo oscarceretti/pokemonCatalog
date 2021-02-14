@@ -99,7 +99,6 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == datasource.count - 1 {
-            guard datasource.count < 1118 else {  return }
             self.delegate?.askForMore()
         }
     }
