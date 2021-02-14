@@ -14,12 +14,12 @@ class PokemonListViewModel: NSObject {
     typealias Dependencies = HasPokemonManager
     let dependecies: Dependencies
     
-    private(set) var pokeData: PokemonList? {
+    private var pokeData: PokemonList?
+    private(set) var pokeDatasource: [Pokemon]? {
         didSet {
             self.bindPokemonListViewModelToController()
         }
     }
-    
     var bindPokemonListViewModelToController : (() -> ()) = { }
     
     
@@ -31,6 +31,7 @@ class PokemonListViewModel: NSObject {
     func callFuncToGetPokemonList() {
         self.dependecies.pokemonManager.getPokemonList(next: self.pokeData?.next){ (pokemonList,error) in
             self.pokeData = pokemonList
+            self.pokeDatasource = pokemonList?.results
         }
     }
     

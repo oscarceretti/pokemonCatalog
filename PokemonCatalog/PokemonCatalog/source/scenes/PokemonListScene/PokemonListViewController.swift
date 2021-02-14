@@ -42,9 +42,9 @@ class PokemonListViewController: UIViewController {
     }
     
     func updateDatasource() {
-        if let pokedata = self.viewModel.pokeData {
+        if let pokedata = self.viewModel.pokeDatasource {
             DispatchQueue.main.async {
-                self.pokemonList.datasource.append(contentsOf: pokedata.results)
+                self.pokemonList.datasource.append(contentsOf: pokedata)
                 self.pokemonList.collectionView?.reloadData()
             }
         }
@@ -56,8 +56,6 @@ extension PokemonListViewController: PokemonListCollectionViewDelegate {
     func openDetail(urlString: String) {
         self.router.openPokemonDetail(from: self, pokemonUrl: urlString)
     }
-    
-
     
     func askForMore() {
         self.viewModel.callFuncToGetPokemonList()

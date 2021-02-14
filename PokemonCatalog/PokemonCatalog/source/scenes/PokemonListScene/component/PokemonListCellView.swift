@@ -33,7 +33,7 @@ class PokemonListCellView: UICollectionViewCell {
         self.addSubview(pokemonImage)
        
         self.pokemonImage.snp.remakeConstraints { (make) in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(self)
             make.centerX.equalTo(self)
             make.width.height.equalTo(100)
         }
@@ -42,7 +42,7 @@ class PokemonListCellView: UICollectionViewCell {
             make.top.equalTo(pokemonImage.snp.bottom).offset(5)
             make.leading.equalTo(self).offset(20)
             make.trailing.equalTo(self).offset(-20)
-            make.bottom.equalTo(self).offset(-20)
+            make.bottom.equalTo(self)
         }
         self.backgroundColor = .white
         self.layer.cornerRadius = 20
