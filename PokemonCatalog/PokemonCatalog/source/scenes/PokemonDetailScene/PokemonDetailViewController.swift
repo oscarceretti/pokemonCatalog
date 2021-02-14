@@ -54,3 +54,45 @@ class PokemonDetailViewController: UIViewController {
     
 }
 
+//PokemonStat(
+//    [
+//        PokemonCatalog.Stat(
+//            baseStat: 58,
+//            effort: 0,
+//            stat: PokemonCatalog.Species(
+//                name: "hp",
+//                url: "https://pokeapi.co/api/v2/stat/1/"
+//            )
+//        ), PokemonCatalog.Stat(
+//            baseStat: 64,
+//            effort: 0,
+//            stat: PokemonCatalog.Species(
+//                name: "attack",
+//                url: "https://pokeapi.co/api/v2/stat/2/")
+//        ), PokemonCatalog.Stat(
+//            baseStat: 58,
+//            effort: 0,
+//            stat: PokemonCatalog.Species(
+//                name: "defense",
+//                url: "https://pokeapi.co/api/v2/stat/3/")
+//        ), PokemonCatalog.Stat(
+//            baseStat: 80,
+//            effort: 1,
+//            stat: PokemonCatalog.Species(
+//                name: "special-attack",
+//                url: "https://pokeapi.co/api/v2/stat/4/")
+//        ), PokemonCatalog.Stat(
+//            baseStat: 65,
+//            effort: 0,
+//            stat: PokemonCatalog.Species(
+//                name: "special-defense",
+//                url: "https://pokeapi.co/api/v2/stat/5/")
+//        ), PokemonCatalog.Stat(
+//            baseStat: 80,
+//            effort: 1,
+//            stat: PokemonCatalog.Species(
+//                name: "speed",
+//                url: "https://pokeapi.co/api/v2/stat/6/")
+//        )
+//    ]
+//)

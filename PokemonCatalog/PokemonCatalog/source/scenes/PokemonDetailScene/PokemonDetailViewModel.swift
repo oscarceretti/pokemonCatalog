@@ -53,14 +53,14 @@ class PokemonDetailViewModel: NSObject {
 
             self.pokemonName = pokemonDetail.name
             self.pokemonImages = [
-                pokemonDetail.sprites.backDefault,
-                pokemonDetail.sprites.backFemale,
-                pokemonDetail.sprites.backShiny,
-                pokemonDetail.sprites.backShinyFemale,
-                pokemonDetail.sprites.frontDefault,
-                pokemonDetail.sprites.frontFemale,
-                pokemonDetail.sprites.frontShiny,
-                pokemonDetail.sprites.frontShinyFemale,
+                pokemonDetail.sprites?.backDefault,
+                pokemonDetail.sprites?.backFemale,
+                pokemonDetail.sprites?.backShiny,
+                pokemonDetail.sprites?.backShinyFemale,
+                pokemonDetail.sprites?.frontDefault,
+                pokemonDetail.sprites?.frontFemale,
+                pokemonDetail.sprites?.frontShiny,
+                pokemonDetail.sprites?.frontShinyFemale,
             ]
             self.pokemonStat = pokemonDetail.stats
             self.pokemonType = pokemonDetail.types

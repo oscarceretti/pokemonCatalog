@@ -79,7 +79,13 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonListCellView.cellId, for: indexPath) as! PokemonListCellView
         if indexPath.item < (datasource.count) {
             cell.pokemonImage.image = UIImage()
-            let imageURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 1).png")
+            var stringUrl: String
+            if indexPath.item  <= 897 {
+                stringUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 1).png"
+            }else {
+                stringUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 9103).png"
+            }
+            let imageURL = URL(string: stringUrl)
             if let url = imageURL {
                 cell.pokemonImage.load(url: url)
             }
@@ -93,6 +99,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == datasource.count - 1 {
+            guard datasource.count < 1118 else {  return }
             self.delegate?.askForMore()
         }
     }
