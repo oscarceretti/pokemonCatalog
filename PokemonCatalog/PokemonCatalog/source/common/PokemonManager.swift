@@ -37,8 +37,7 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 completion(nil, error)
                 debugPrint(error.localizedDescription)
             }
-           
-            
+
         }.resume()
     }
     
@@ -56,8 +55,7 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 // TO-DO: Handle error
                 debugPrint(error.localizedDescription)
             }
-           
-            
+   
         }.resume()
     }
     

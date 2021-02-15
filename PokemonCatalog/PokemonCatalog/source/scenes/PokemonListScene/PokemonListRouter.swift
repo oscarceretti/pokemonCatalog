@@ -23,6 +23,6 @@ final class PokemonListRouter: PokemonListRouterProtocol {
     func openPokemonDetail(from: UIViewController, pokemonUrl: String) {
         let vc = self.sceneFactory.buildPokemonDetailScene(urlString: pokemonUrl)
         from.navigationController?.pushViewController(vc, animated: true)
-            //.present(vc, animated: true, completion: nil)
     }
+    
 }

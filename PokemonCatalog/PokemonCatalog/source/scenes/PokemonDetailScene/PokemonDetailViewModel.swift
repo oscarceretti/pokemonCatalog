@@ -52,6 +52,7 @@ class PokemonDetailViewModel: NSObject {
         self.dependecies.pokemonManager.getPokemonDetail(urlString: pokemonUrl) { pokemonDetail in
 
             self.pokemonName = pokemonDetail.name
+            
             self.pokemonImages = [
                 pokemonDetail.sprites?.backDefault,
                 pokemonDetail.sprites?.backFemale,
@@ -60,9 +61,11 @@ class PokemonDetailViewModel: NSObject {
                 pokemonDetail.sprites?.frontDefault,
                 pokemonDetail.sprites?.frontFemale,
                 pokemonDetail.sprites?.frontShiny,
-                pokemonDetail.sprites?.frontShinyFemale,
+                pokemonDetail.sprites?.frontShinyFemale
             ]
+            
             self.pokemonStat = pokemonDetail.stats
+            
             self.pokemonType = pokemonDetail.types
         }
     }

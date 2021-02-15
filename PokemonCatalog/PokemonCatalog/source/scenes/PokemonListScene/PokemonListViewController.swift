@@ -29,8 +29,8 @@ class PokemonListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        callToViewModelForUIUpdate()
         pokemonList.delegate = self
+        callToViewModelForUIUpdate()
         self.viewModel.callFuncToGetPokemonList()
     }
     

@@ -20,7 +20,8 @@ final class CompositionRoot {
 
 extension CompositionRoot: PokemonListSceneFactory {
     func buildPokemonListScene() -> PokemonListViewController {
-        let viewModel = PokemonListViewModel(dependecies: dependencies)
+        let interactor = PokemonListInteractor(dependencies: dependencies)
+        let viewModel = PokemonListViewModel(interactor: interactor)
         let router = PokemonListRouter(sceneFactory: self)
         let vc = PokemonListViewController(viewModel: viewModel, router: router)
         return vc

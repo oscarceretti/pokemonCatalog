@@ -79,15 +79,8 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonListCellView.cellId, for: indexPath) as! PokemonListCellView
         if indexPath.item < (datasource.count) {
             cell.pokemonImage.image = UIImage()
-            var stringUrl: String
-            if indexPath.item  <= 897 {
-                stringUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 1).png"
-            }else {
-                stringUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.item + 9103).png"
-            }
-            let imageURL = URL(string: stringUrl)
-            if let url = imageURL {
-                cell.pokemonImage.load(url: url)
+            if let sprite = self.datasource[indexPath.item].sprite,let imageURL = URL(string: sprite)  {
+                cell.pokemonImage.load(url: imageURL)
             }
             cell.pokemonName.text = self.datasource[indexPath.item].name
            
