@@ -138,11 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				F6E5CE0F25D5AC4300B2B7AA /* component */,
-				F62A1F7025D32BDC00302692 /* PokemonListViewModel.swift */,
 				F625B3B225D3215A00CF1001 /* PokemonListViewController.swift */,
+				F62A1F7025D32BDC00302692 /* PokemonListViewModel.swift */,
+				F6D578FD25DB081C00E26A5A /* PokemonListInteractor.swift */,
 				F62A1F9925D334DA00302692 /* PokemonListView.swift */,
 				F69282E625D7D93C00024378 /* PokemonListRouter.swift */,
-				F6D578FD25DB081C00E26A5A /* PokemonListInteractor.swift */,
 			);
 			path = PokemonListScene;
 			sourceTree = "<group>";
