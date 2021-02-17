@@ -10,27 +10,25 @@ import Foundation
 class PokemonDetailViewModel: NSObject {
     
     typealias Dependencies = HasPokemonManager
-    let dependecies: Dependencies
-    let pokemonUrl: String
-    
+    let interactor: PokemonDetailInteractorInterface
     
     private(set) var pokemonName: String? {
         didSet {
             self.bindPokemonNameToController()
         }
     }
-    private(set) var pokemonImages: [String?]? {
+    private(set) var pokemonImages: [String]? {
         didSet {
             self.bindPokemonImagesToController()
         }
     }
-    private(set) var pokemonStat: [Stat]? {
+    private(set) var pokemonStat: [String:Int]? {
         didSet {
             self.bindPokemonStatToController()
         }
     }
     
-    private(set) var pokemonType: [TypeElement]? {
+    private(set) var pokemonType: [Asset]? {
         didSet {
             self.bindPokemonTypeToController()
         }
@@ -41,32 +39,19 @@ class PokemonDetailViewModel: NSObject {
     var bindPokemonStatToController : (() -> ()) = { }
     var bindPokemonTypeToController : (() -> ()) = { }
     
-    init (dependecies: Dependencies, urlString: String) {
-        self.dependecies = dependecies
-        self.pokemonUrl = urlString
-        
+    init (interactor: PokemonDetailInteractorInterface) {
+        self.interactor = interactor
     }
     
 
     func callFuncToGetPokemonDetail() {
-        self.dependecies.pokemonManager.getPokemonDetail(urlString: pokemonUrl) { pokemonDetail in
+        self.interactor.getPokemonDetail() { (pokemonName,pokemonImages,statsDict,types,error) in
+            
+            self.pokemonName = pokemonName
+            self.pokemonImages = pokemonImages
+            self.pokemonStat = statsDict
+            self.pokemonType = types
 
-            self.pokemonName = pokemonDetail.name
-            
-            self.pokemonImages = [
-                pokemonDetail.sprites?.backDefault,
-                pokemonDetail.sprites?.backFemale,
-                pokemonDetail.sprites?.backShiny,
-                pokemonDetail.sprites?.backShinyFemale,
-                pokemonDetail.sprites?.frontDefault,
-                pokemonDetail.sprites?.frontFemale,
-                pokemonDetail.sprites?.frontShiny,
-                pokemonDetail.sprites?.frontShinyFemale
-            ]
-            
-            self.pokemonStat = pokemonDetail.stats
-            
-            self.pokemonType = pokemonDetail.types
         }
     }
     

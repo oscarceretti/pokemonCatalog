@@ -30,7 +30,9 @@ extension CompositionRoot: PokemonListSceneFactory {
 
 extension CompositionRoot: PokemonDetailSceneFactory {
     func buildPokemonDetailScene(urlString: String) -> PokemonDetailViewController {
-        let viewModel = PokemonDetailViewModel(dependecies: dependencies, urlString: urlString)
+        let interactor = PokemonDetailInteractor(dependencies: dependencies,pokemonUrl:urlString)
+        let viewModel = PokemonDetailViewModel(interactor: interactor)
+        
         let router = PokemonDetailRouter(sceneFactory: self)
         let vc = PokemonDetailViewController(viewModel: viewModel, router: router)
         return vc

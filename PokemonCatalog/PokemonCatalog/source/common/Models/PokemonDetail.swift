@@ -24,11 +24,11 @@ struct PokemonDetail: Codable {
     let isDefault: Bool?
     let locationAreaEncounters: String?
     let moves: [Move?]
-    let name: String?
+    let name: String
     let order: Int?
     let species: Species?
     let sprites: Sprites?
-    let stats: [Stat]?
+    let stats: [Stat]
     let types: [TypeElement]?
     let weight: Int?
 
@@ -60,8 +60,8 @@ struct Ability: Codable {
 
 // MARK: - Species
 struct Species: Codable {
-    let name: String?
-    let url: String?
+    let name: String
+    let url: String
 }
 
 // MARK: - GameIndex
@@ -294,8 +294,8 @@ struct OfficialArtwork: Codable {
 
 // MARK: - Stat
 struct Stat: Codable {
-    let baseStat, effort: Int?
-    let stat: Species?
+    let baseStat, effort: Int
+    let stat: Species
 
     enum CodingKeys: String, CodingKey {
         case baseStat = "base_stat"
@@ -306,6 +306,6 @@ struct Stat: Codable {
 // MARK: - TypeElement
 struct TypeElement: Codable {
     let slot: Int?
-    let type: Species?
+    let type: Species
 }
 

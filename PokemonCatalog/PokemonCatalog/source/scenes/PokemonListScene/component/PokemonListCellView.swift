@@ -26,8 +26,6 @@ class PokemonListCellView: UICollectionViewCell {
         self.setupViews()
     }
     
-
-    
     func setupViews(){
         self.addSubview(pokemonName)
         self.addSubview(pokemonImage)

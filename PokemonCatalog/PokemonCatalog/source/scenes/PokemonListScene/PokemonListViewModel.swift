@@ -11,7 +11,7 @@ import Foundation
 
 class PokemonListViewModel: NSObject {
 
-    let interactor: PokemonListInteractor
+    let interactor: PokemonListInteractorInterface
     
     private(set) var pokeDatasource: [Pokemon]? {
         didSet {
@@ -21,7 +21,7 @@ class PokemonListViewModel: NSObject {
     var bindPokemonListViewModelToController : (() -> ()) = { }
 
 
-    init (interactor: PokemonListInteractor) {
+    init (interactor: PokemonListInteractorInterface) {
         self.interactor = interactor
     }
 

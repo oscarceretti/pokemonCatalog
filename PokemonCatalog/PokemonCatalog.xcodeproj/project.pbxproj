@@ -25,6 +25,9 @@
 		F69282FE25D7DE5500024378 /* PokemonDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69282FD25D7DE5500024378 /* PokemonDetailRouter.swift */; };
 		F692830325D7E25900024378 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692830225D7E25900024378 /* Theme.swift */; };
 		F692830825D7E2A200024378 /* UIColor+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692830725D7E2A200024378 /* UIColor+Extras.swift */; };
+		F6977E7125DC4397000C4E6C /* PokemonDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6977E7025DC4397000C4E6C /* PokemonDetailInteractor.swift */; };
+		F6977E7425DCFC51000C4E6C /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6977E7325DCFC51000C4E6C /* Asset.swift */; };
+		F6977E7725DD009F000C4E6C /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6977E7625DD009F000C4E6C /* PokemonDetailView.swift */; };
 		F6D578FE25DB081C00E26A5A /* PokemonListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D578FD25DB081C00E26A5A /* PokemonListInteractor.swift */; };
 		F6E5CDFC25D59FB700B2B7AA /* AppDependecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CDFB25D59FB700B2B7AA /* AppDependecies.swift */; };
 		F6E5CE0225D5A00A00B2B7AA /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */; };
@@ -59,6 +62,9 @@
 		F69282FD25D7DE5500024378 /* PokemonDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailRouter.swift; sourceTree = "<group>"; };
 		F692830225D7E25900024378 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F692830725D7E2A200024378 /* UIColor+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extras.swift"; sourceTree = "<group>"; };
+		F6977E7025DC4397000C4E6C /* PokemonDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailInteractor.swift; sourceTree = "<group>"; };
+		F6977E7325DCFC51000C4E6C /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		F6977E7625DD009F000C4E6C /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
 		F6D578FD25DB081C00E26A5A /* PokemonListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInteractor.swift; sourceTree = "<group>"; };
 		F6E5CDFB25D59FB700B2B7AA /* AppDependecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependecies.swift; sourceTree = "<group>"; };
 		F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				F625B3BC25D3215B00CF1001 /* Info.plist */,
 				F625B3B925D3215B00CF1001 /* LaunchScreen.storyboard */,
 				F6470FF325D83B3600B5C186 /* Constants.swift */,
+				F6977E7325DCFC51000C4E6C /* Asset.swift */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -203,6 +210,8 @@
 				F69282F025D7DE3900024378 /* PokemonDetailViewController.swift */,
 				F69282F825D7DE4500024378 /* PokemonDetailViewModel.swift */,
 				F69282FD25D7DE5500024378 /* PokemonDetailRouter.swift */,
+				F6977E7025DC4397000C4E6C /* PokemonDetailInteractor.swift */,
+				F6977E7625DD009F000C4E6C /* PokemonDetailView.swift */,
 			);
 			path = PokemonDetailScene;
 			sourceTree = "<group>";
@@ -306,7 +315,10 @@
 				F6470FEC25D8364100B5C186 /* Material+Extras.swift in Sources */,
 				F69282E725D7D93C00024378 /* PokemonListRouter.swift in Sources */,
 				F6E5CE0225D5A00A00B2B7AA /* CompositionRoot.swift in Sources */,
+				F6977E7125DC4397000C4E6C /* PokemonDetailInteractor.swift in Sources */,
 				F69282F125D7DE3900024378 /* PokemonDetailViewController.swift in Sources */,
+				F6977E7725DD009F000C4E6C /* PokemonDetailView.swift in Sources */,
+				F6977E7425DCFC51000C4E6C /* Asset.swift in Sources */,
 				F625B3B325D3215A00CF1001 /* PokemonListViewController.swift in Sources */,
 				F62A1F7625D32D2C00302692 /* PokemonManager.swift in Sources */,
 				F6E5CDFC25D59FB700B2B7AA /* AppDependecies.swift in Sources */,

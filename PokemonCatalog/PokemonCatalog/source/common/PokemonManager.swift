@@ -12,7 +12,7 @@ protocol HasPokemonManager {
 
 protocol PokemonManagerProtocol {
     func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ())
-    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail) -> ())
+    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail?, Error?) -> ())
 }
 class PokemonManager: NSObject, PokemonManagerProtocol{
     
@@ -41,7 +41,7 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
         }.resume()
     }
     
-    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail) -> ()) {
+    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail?, Error?) -> ()) {
         let sourceURL = URL(string: urlString)
         guard let url = sourceURL else { return }
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
@@ -49,11 +49,11 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     let pokeData = try jsonDecoder.decode(PokemonDetail.self, from: data)
-                    completion(pokeData)
+                    completion(pokeData,nil)
                 }
             }catch {
                 // TO-DO: Handle error
-                debugPrint(error.localizedDescription)
+                completion(nil, error)
             }
    
         }.resume()

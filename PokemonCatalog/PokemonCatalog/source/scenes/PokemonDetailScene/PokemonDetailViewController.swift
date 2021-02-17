@@ -11,13 +11,16 @@ import SnapKit
 class PokemonDetailViewController: UIViewController {
     
     private var viewModel: PokemonDetailViewModel
+    private var mainView = PokemonDetailView()
     
-   
     
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
+        self.view.addSubview(mainView)
+        mainView.snp.remakeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +38,9 @@ class PokemonDetailViewController: UIViewController {
     func callToViewModelForUIUpdate() {
         
         self.viewModel.bindPokemonNameToController = {
-            debugPrint(self.viewModel.pokemonName)
+            DispatchQueue.main.async {
+                self.mainView.pokemonName.text = self.viewModel.pokemonName
+            }
         }
         
         self.viewModel.bindPokemonImagesToController = {
@@ -54,45 +59,4 @@ class PokemonDetailViewController: UIViewController {
     
 }
 
-//PokemonStat(
-//    [
-//        PokemonCatalog.Stat(
-//            baseStat: 58,
-//            effort: 0,
-//            stat: PokemonCatalog.Species(
-//                name: "hp",
-//                url: "https://pokeapi.co/api/v2/stat/1/"
-//            )
-//        ), PokemonCatalog.Stat(
-//            baseStat: 64,
-//            effort: 0,
-//            stat: PokemonCatalog.Species(
-//                name: "attack",
-//                url: "https://pokeapi.co/api/v2/stat/2/")
-//        ), PokemonCatalog.Stat(
-//            baseStat: 58,
-//            effort: 0,
-//            stat: PokemonCatalog.Species(
-//                name: "defense",
-//                url: "https://pokeapi.co/api/v2/stat/3/")
-//        ), PokemonCatalog.Stat(
-//            baseStat: 80,
-//            effort: 1,
-//            stat: PokemonCatalog.Species(
-//                name: "special-attack",
-//                url: "https://pokeapi.co/api/v2/stat/4/")
-//        ), PokemonCatalog.Stat(
-//            baseStat: 65,
-//            effort: 0,
-//            stat: PokemonCatalog.Species(
-//                name: "special-defense",
-//                url: "https://pokeapi.co/api/v2/stat/5/")
-//        ), PokemonCatalog.Stat(
-//            baseStat: 80,
-//            effort: 1,
-//            stat: PokemonCatalog.Species(
-//                name: "speed",
-//                url: "https://pokeapi.co/api/v2/stat/6/")
-//        )
-//    ]
-//)
+
