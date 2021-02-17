@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+
 class PokemonDetailViewController: UIViewController {
     
     private var viewModel: PokemonDetailViewModel
@@ -44,15 +45,30 @@ class PokemonDetailViewController: UIViewController {
         }
         
         self.viewModel.bindPokemonImagesToController = {
-            debugPrint(self.viewModel.pokemonImages)
+            DispatchQueue.main.async {
+                if let images = self.viewModel.pokemonImages {
+                    self.mainView.pokemonCarusel.datasource = images
+                    self.mainView.pokemonCarusel.collectionView?.reloadData()
+                }
+            }
         }
         
         self.viewModel.bindPokemonStatToController = {
-            debugPrint(self.viewModel.pokemonStat)
+            DispatchQueue.main.async {
+                if let types = self.viewModel.pokemonType {
+                    self.mainView.typesCollection.datasource = types
+                    self.mainView.typesCollection.collectionView?.reloadData()
+                }
+            }
         }
         
         self.viewModel.bindPokemonTypeToController = {
-            debugPrint(self.viewModel.pokemonType)
+            DispatchQueue.main.async {
+                if let stats = self.viewModel.pokemonStat {
+                    self.mainView.statsCollection.datasource = stats
+                    self.mainView.statsCollection.collectionView?.reloadData()
+                }
+            }
         }
         
     }

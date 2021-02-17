@@ -22,7 +22,7 @@ class PokemonDetailViewModel: NSObject {
             self.bindPokemonImagesToController()
         }
     }
-    private(set) var pokemonStat: [String:Int]? {
+    private(set) var pokemonStat: [PokemonStatEntity]? {
         didSet {
             self.bindPokemonStatToController()
         }
@@ -45,11 +45,16 @@ class PokemonDetailViewModel: NSObject {
     
 
     func callFuncToGetPokemonDetail() {
-        self.interactor.getPokemonDetail() { (pokemonName,pokemonImages,statsDict,types,error) in
+        self.interactor.getPokemonDetail() { (pokemonName,pokemonImages,statsArray,types,error) in
             
-            self.pokemonName = pokemonName
+            if let name = pokemonName {
+                self.pokemonName = name
+            }
+     
             self.pokemonImages = pokemonImages
-            self.pokemonStat = statsDict
+            
+            self.pokemonStat = statsArray
+        
             self.pokemonType = types
 
         }

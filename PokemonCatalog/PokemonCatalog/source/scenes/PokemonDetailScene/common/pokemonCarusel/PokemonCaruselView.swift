@@ -1,32 +1,25 @@
 //
-//  PokemonListCollectionView.swift
+//  PokemonCaruselView.swift
 //  PokemonCatalog
 //
-//  Created by Oscar Ceretti on 11/02/2021.
+//  Created by Oscar Ceretti on 17/02/2021.
 //
 
 import Foundation
 import UIKit
-import SnapKit
 
-protocol PokemonListCollectionViewDelegate: class {
-    func askForMore()
-    func openDetail(urlString: String)
-}
-
-final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class PokemonCaruselView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView : UICollectionView?
     let cellSpacing:CGFloat = 2
     
-    var datasource: [Pokemon] = []
+    var datasource: [String] = []
     
-    weak var delegate: PokemonListCollectionViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    init(datasource: [Pokemon]) {
+    init(datasource: [String]) {
         super.init(frame: .zero)
         self.datasource = datasource
         setCollectionView()
@@ -51,22 +44,22 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
         
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView!.setCollectionViewLayout(collectionViewFlowLayout, animated: true)
-        collectionViewFlowLayout.scrollDirection = .vertical
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        collectionViewFlowLayout.minimumLineSpacing = 20
-        collectionViewFlowLayout.minimumInteritemSpacing = 20
+        collectionViewFlowLayout.scrollDirection = .horizontal
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionViewFlowLayout.minimumLineSpacing = 0
+        collectionViewFlowLayout.minimumInteritemSpacing = 0
         
         collectionView?.isPagingEnabled = true
         collectionView?.bounces = false
         
-        collectionView!.register(PokemonListCellView.self, forCellWithReuseIdentifier: PokemonListCellView.cellId)
+        collectionView!.register(PokemonCaruselCellView.self, forCellWithReuseIdentifier: PokemonCaruselCellView.cellId)
         collectionView!.delegate = self
         collectionView!.dataSource = self
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
 
@@ -75,33 +68,23 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonListCellView.cellId, for: indexPath) as! PokemonListCellView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCaruselCellView.cellId, for: indexPath) as! PokemonCaruselCellView
         if indexPath.item < (datasource.count) {
-            cell.pokemonImage.image = UIImage()
-            if let sprite = self.datasource[indexPath.item].sprite,let imageURL = URL(string: sprite)  {
+            if let imageURL = URL(string: self.datasource[indexPath.item])  {
                 cell.pokemonImage.load(url: imageURL)
             }
-            cell.pokemonName.text = self.datasource[indexPath.item].name
-           
         }
         
         return cell
     }
     
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == datasource.count - 1 {
-            self.delegate?.askForMore()
-        }
-    }
     
-    func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
-        self.delegate?.openDetail(urlString: datasource[indexPath.row].url)
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.size.width - 50) / 2
+        let width = self.frame.width
         let height = width
         return CGSize(width: width, height: height)
     }
 }
+

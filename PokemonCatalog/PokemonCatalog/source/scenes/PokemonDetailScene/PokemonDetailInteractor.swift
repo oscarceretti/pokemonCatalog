@@ -7,7 +7,7 @@
 
 import Foundation
 protocol PokemonDetailInteractorInterface {
-    func getPokemonDetail(completion: @escaping (String?, [String], [String:Int], [Asset], Error?) -> ())
+    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], Error?) -> ())
 }
 
 final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
@@ -24,10 +24,10 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
     
     deinit{}
     
-    func getPokemonDetail(completion: @escaping (String?, [String], [String:Int], [Asset], Error?) -> ()) {
+    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], Error?) -> ()) {
         self.dependencies.pokemonManager.getPokemonDetail(urlString: pokemonUrl) { (pokemonDetail, error) in
             
-            self.getTypes(types: pokemonDetail?.types)
+            
             completion(
                 pokemonDetail?.name,
                 self.getImages(sprites: pokemonDetail?.sprites),
@@ -37,33 +37,39 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
         }
     }
     
-    
+    // MARK: - Helpers Methods
     private func getImages(sprites: Sprites?) -> [String] {
         let pokemonOptionalImages = [
-              sprites?.other?.officialArtwork?.frontDefault,
-              sprites?.backDefault,
-              sprites?.backFemale,
-              sprites?.backShiny,
-              sprites?.backShinyFemale,
-              sprites?.frontFemale,
-              sprites?.frontShiny,
-              sprites?.frontShinyFemale
-          
-          ]
-          var pokemonImages:[String] = []
-          for image in pokemonOptionalImages  {
-              if let img = image { pokemonImages.append(img) }
-          }
+            sprites?.other?.officialArtwork?.frontDefault,
+            sprites?.backDefault,
+            sprites?.backFemale,
+            sprites?.backShiny,
+            sprites?.backShinyFemale,
+            sprites?.frontFemale,
+            sprites?.frontShiny,
+            sprites?.frontShinyFemale
+            
+        ]
+        var pokemonImages:[String] = []
+        for image in pokemonOptionalImages  {
+            if let img = image { pokemonImages.append(img) }
+        }
         return pokemonImages
     }
-    private func getStatDict(statsArray: [Stat]?) -> [String: Int] {
-        var statsDictionary: [String: Int] = [:]
+    private func getStatDict(statsArray: [Stat]?) -> [PokemonStatEntity] {
+        var statsEntityArray: [PokemonStatEntity] = []
         if let stats = statsArray {
             for stat in stats {
-                statsDictionary[stat.stat.name] = stat.baseStat
+                // devidev by 100 for progressview
+                statsEntityArray.append(
+                    PokemonStatEntity(name: stat.stat.name,
+                                      value: String(stat.baseStat),
+                                      percentage: Float(Float(stat.baseStat) / Float(100)))
+                )
+                
             }
         }
-        return statsDictionary
+        return statsEntityArray
     }
     
     private func getTypes(types: [TypeElement]?)->[Asset] {

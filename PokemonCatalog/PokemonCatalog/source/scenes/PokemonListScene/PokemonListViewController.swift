@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import SnapKit
+
+
 class PokemonListViewController: UIViewController {
     
     private var viewModel: PokemonListViewModel
