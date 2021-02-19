@@ -13,7 +13,7 @@ class PokemonListViewModel: NSObject {
 
     let interactor: PokemonListInteractorInterface
     
-    private(set) var pokeDatasource: [Pokemon]? {
+    private(set) var pokeDatasource: [PokemonEntity]? {
         didSet {
             self.bindPokemonListViewModelToController()
         }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonListInteractorInterface {
-    func getPokemonEntity(completion: @escaping ([Pokemon]?,Error?) -> ())
+    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,Error?) -> ())
 }
 
 final class PokemonListInteractor: PokemonListInteractorInterface {
@@ -23,8 +23,9 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     
     deinit{}
     
-    func getPokemonEntity(completion: @escaping ([Pokemon]?,Error?) -> ()){
-        var updatedPokemons: [Pokemon] = []
+
+    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,Error?) -> ()){
+        var updatedPokemons: [PokemonEntity] = []
         self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { (pokemonList,error) in
             let myGroup = DispatchGroup()
             self.pokeData = pokemonList
@@ -42,7 +43,7 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
                             } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
                                 sprite = official
                             }
-                            let newPokemonData = Pokemon(name: pokemon.name, url: pokemon.url, sprite: sprite)
+                            let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
                             if !sprite.isEmpty{
                                 updatedPokemons.append(newPokemonData)
                             }
@@ -63,6 +64,7 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
             }
         }
     }
+    
 }
 
 

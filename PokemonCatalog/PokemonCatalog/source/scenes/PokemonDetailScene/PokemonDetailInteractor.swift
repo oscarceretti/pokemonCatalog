@@ -25,9 +25,8 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
     deinit{}
     
     func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], Error?) -> ()) {
-        self.dependencies.pokemonManager.getPokemonDetail(urlString: pokemonUrl) { (pokemonDetail, error) in
-            
-            
+        self.dependencies.pokemonManager.getPokemonDetail(urlString: "https://pokeapi.co/api/v2/pokemon/\(pokemonUrl)" ) { (pokemonDetail, error) in
+
             completion(
                 pokemonDetail?.name,
                 self.getImages(sprites: pokemonDetail?.sprites),

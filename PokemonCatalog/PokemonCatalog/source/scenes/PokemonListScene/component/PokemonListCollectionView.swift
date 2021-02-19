@@ -19,14 +19,14 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     var collectionView : UICollectionView?
     let cellSpacing:CGFloat = 2
     
-    var datasource: [Pokemon] = []
+    var datasource: [PokemonEntity] = []
     
     weak var delegate: PokemonListCollectionViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    init(datasource: [Pokemon]) {
+    init(datasource: [PokemonEntity]) {
         super.init(frame: .zero)
         self.datasource = datasource
         setCollectionView()
@@ -78,7 +78,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonListCellView.cellId, for: indexPath) as! PokemonListCellView
         if indexPath.item < (datasource.count) {
             cell.pokemonImage.image = UIImage()
-            if let sprite = self.datasource[indexPath.item].sprite,let imageURL = URL(string: sprite)  {
+            if let imageURL = URL(string: self.datasource[indexPath.item].sprite)  {
                 cell.pokemonImage.load(url: imageURL)
             }
             cell.pokemonName.text = self.datasource[indexPath.item].name
@@ -96,7 +96,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
-        self.delegate?.openDetail(urlString: datasource[indexPath.row].url)
+        self.delegate?.openDetail(urlString: datasource[indexPath.row].name)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
