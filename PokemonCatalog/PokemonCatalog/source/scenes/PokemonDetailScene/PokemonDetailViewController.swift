@@ -38,38 +38,45 @@ class PokemonDetailViewController: UIViewController {
     
     func callToViewModelForUIUpdate() {
         
-        self.viewModel.bindPokemonNameToController = {
+        self.viewModel.bindPokemonNameToController = { name in
             DispatchQueue.main.async {
-                self.mainView.pokemonName.text = self.viewModel.pokemonName
+                self.mainView.pokemonName.text = name
             }
         }
         
-        self.viewModel.bindPokemonImagesToController = {
+        self.viewModel.bindPokemonImagesToController = { sprites in
             DispatchQueue.main.async {
-                if let images = self.viewModel.pokemonImages {
-                    self.mainView.pokemonCarusel.datasource = images
-                    self.mainView.pokemonCarusel.collectionView?.reloadData()
-                }
+                self.mainView.pokemonCarusel.datasource = sprites
+                self.mainView.pokemonCarusel.collectionView?.reloadData()
             }
         }
         
-        self.viewModel.bindPokemonStatToController = {
+        self.viewModel.bindPokemonStatToController = { stats in
             DispatchQueue.main.async {
-                if let types = self.viewModel.pokemonType {
-                    self.mainView.typesCollection.datasource = types
-                    self.mainView.typesCollection.collectionView?.reloadData()
-                }
+                self.mainView.statsCollection.datasource = stats
+                self.mainView.statsCollection.collectionView?.reloadData()
+                
             }
         }
         
-        self.viewModel.bindPokemonTypeToController = {
+        self.viewModel.bindPokemonTypeToController = { types in
             DispatchQueue.main.async {
-                if let stats = self.viewModel.pokemonStat {
-                    self.mainView.statsCollection.datasource = stats
-                    self.mainView.statsCollection.collectionView?.reloadData()
-                }
+                self.mainView.typesCollection.datasource = types
+                self.mainView.typesCollection.collectionView?.reloadData()
             }
         }
+        
+        self.viewModel.bindErrorViewModelToController = {error in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Ops", message: error, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+                    alert.dismiss(animated: true)
+                })
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            }
+        }
+        
         
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 protocol PokemonDetailInteractorInterface {
-    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], Error?) -> ())
+    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], String?) -> ())
 }
 
 final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
@@ -24,7 +24,7 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
     
     deinit{}
     
-    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], Error?) -> ()) {
+    func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], String?) -> ()) {
         self.dependencies.pokemonManager.getPokemonDetail(urlString: "https://pokeapi.co/api/v2/pokemon/\(pokemonUrl)" ) { (pokemonDetail, error) in
 
             completion(
@@ -32,7 +32,7 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
                 self.getImages(sprites: pokemonDetail?.sprites),
                 self.getStatDict(statsArray: pokemonDetail?.stats),
                 self.getTypes(types: pokemonDetail?.types),
-                error)
+                error?.localizedDescription)
         }
     }
     

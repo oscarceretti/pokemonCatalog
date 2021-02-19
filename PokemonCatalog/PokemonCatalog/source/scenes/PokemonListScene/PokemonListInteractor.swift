@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonListInteractorInterface {
-    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,Error?) -> ())
+    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ())
 }
 
 final class PokemonListInteractor: PokemonListInteractorInterface {
@@ -24,7 +24,7 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     deinit{}
     
 
-    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,Error?) -> ()){
+    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ()){
         var updatedPokemons: [PokemonEntity] = []
         self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { (pokemonList,error) in
             let myGroup = DispatchGroup()
@@ -53,14 +53,15 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
                         }
                         
                     }
+                    
                 }
                
                 myGroup.notify(queue: .main) {
-                    completion(updatedPokemons,error)
+                    completion(updatedPokemons,error?.localizedDescription)
                 }
                 
             }else {
-                completion(nil,error)
+                completion(nil,error?.localizedDescription)
             }
         }
     }

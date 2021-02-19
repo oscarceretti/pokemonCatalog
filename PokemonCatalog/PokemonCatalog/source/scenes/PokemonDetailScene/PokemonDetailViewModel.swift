@@ -14,30 +14,41 @@ class PokemonDetailViewModel: NSObject {
     
     private(set) var pokemonName: String? {
         didSet {
-            self.bindPokemonNameToController()
+            guard let name = self.pokemonName else { return }
+            self.bindPokemonNameToController(name)
         }
     }
     private(set) var pokemonImages: [String]? {
         didSet {
-            self.bindPokemonImagesToController()
+            guard let sprites = self.pokemonImages else { return }
+            self.bindPokemonImagesToController(sprites)
         }
     }
     private(set) var pokemonStat: [PokemonStatEntity]? {
         didSet {
-            self.bindPokemonStatToController()
+            guard let stats = self.pokemonStat else { return }
+            self.bindPokemonStatToController(stats)
         }
     }
     
     private(set) var pokemonType: [Asset]? {
         didSet {
-            self.bindPokemonTypeToController()
+            guard let type = self.pokemonType else { return }
+            self.bindPokemonTypeToController(type)
+        }
+    }
+    private(set) var error: String? {
+        didSet {
+            guard let error = self.error else { return }
+            self.bindErrorViewModelToController(error)
         }
     }
     
-    var bindPokemonNameToController : (() -> ()) = { }
-    var bindPokemonImagesToController : (() -> ()) = { }
-    var bindPokemonStatToController : (() -> ()) = { }
-    var bindPokemonTypeToController : (() -> ()) = { }
+    var bindPokemonNameToController : (_ name: String) -> () = { _ in}
+    var bindPokemonImagesToController : (_ sprites: [String]) -> () = { _ in }
+    var bindPokemonStatToController : (_ stats: [PokemonStatEntity]) -> () = { _ in }
+    var bindPokemonTypeToController : (_ type: [Asset]) -> () = { _ in }
+    var bindErrorViewModelToController : (_ error: String) -> () = { _ in }
     
     init (interactor: PokemonDetailInteractorInterface) {
         self.interactor = interactor
@@ -47,15 +58,16 @@ class PokemonDetailViewModel: NSObject {
     func callFuncToGetPokemonDetail() {
         self.interactor.getPokemonDetail() { (pokemonName,pokemonImages,statsArray,types,error) in
             
-            if let name = pokemonName {
-                self.pokemonName = name
-            }
-     
+
+            self.pokemonName = pokemonName
+            
             self.pokemonImages = pokemonImages
             
             self.pokemonStat = statsArray
         
             self.pokemonType = types
+            
+            self.error = error
 
         }
     }

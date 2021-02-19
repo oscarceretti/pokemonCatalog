@@ -10,8 +10,9 @@ import UIKit
 
 class PokemonListViewController: UIViewController {
     
-    private var viewModel: PokemonListViewModel
-    private var router: PokemonListRouter
+    private let viewModel: PokemonListViewModel
+    private let router: PokemonListRouter
+    
     private var pokemonList = PokemonListCollectionView(datasource: [])
     
     init(viewModel: PokemonListViewModel, router: PokemonListRouter) {
@@ -37,18 +38,25 @@ class PokemonListViewController: UIViewController {
     
     
     func callToViewModelForUIUpdate() {
-        self.viewModel.bindPokemonListViewModelToController = {
-            self.updateDatasource()
-        }
-    }
-    
-    func updateDatasource() {
-        if let pokedata = self.viewModel.pokeDatasource {
+        
+        self.viewModel.bindPokemonListViewModelToController = { datasource in
             DispatchQueue.main.async {
-                self.pokemonList.datasource.append(contentsOf: pokedata)
+                self.pokemonList.datasource.append(contentsOf: datasource)
                 self.pokemonList.collectionView?.reloadData()
             }
         }
+        
+        self.viewModel.bindErrorViewModelToController = {error in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Ops", message: error, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+                    alert.dismiss(animated: true)
+                })
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            }
+        }
+        
     }
     
 }

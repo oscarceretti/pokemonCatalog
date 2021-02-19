@@ -15,11 +15,20 @@ class PokemonListViewModel: NSObject {
     
     private(set) var pokeDatasource: [PokemonEntity]? {
         didSet {
-            self.bindPokemonListViewModelToController()
+            guard let datasource = self.pokeDatasource else { return }
+            self.bindPokemonListViewModelToController(datasource)
         }
     }
-    var bindPokemonListViewModelToController : (() -> ()) = { }
-
+    
+    private(set) var error: String? {
+        didSet {
+            guard let error = self.error else { return }
+            self.bindErrorViewModelToController(error)
+        }
+    }
+    
+    var bindPokemonListViewModelToController : (_ datasource: [PokemonEntity]) -> () = { _ in }
+    var bindErrorViewModelToController : (_ error: String) -> () = {_ in}
 
     init (interactor: PokemonListInteractorInterface) {
         self.interactor = interactor
@@ -28,6 +37,7 @@ class PokemonListViewModel: NSObject {
     func callFuncToGetPokemonList() {
         self.interactor.getPokemonEntity(){ (pokemonList,error) in
             self.pokeDatasource = pokemonList
+            self.error = error
         }
     }
 
