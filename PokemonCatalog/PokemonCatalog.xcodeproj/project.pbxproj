@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F61F9D8425E00F8900ADCE5D /* PokemonManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F9D8325E00F8900ADCE5D /* PokemonManagerTest.swift */; };
+		F61F9D8425E00F8900ADCE5D /* PokemonListInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F9D8325E00F8900ADCE5D /* PokemonListInteractorTest.swift */; };
 		F61F9D9725E020A300ADCE5D /* PokemonDetailInteractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F9D9625E020A300ADCE5D /* PokemonDetailInteractTest.swift */; };
 		F625B3AF25D3215A00CF1001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3AE25D3215A00CF1001 /* AppDelegate.swift */; };
 		F625B3B325D3215A00CF1001 /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F625B3B225D3215A00CF1001 /* PokemonListViewController.swift */; };
@@ -60,7 +60,7 @@
 /* Begin PBXFileReference section */
 		F61F9D7725E00EAE00ADCE5D /* PokemonCatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonCatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61F9D7B25E00EAE00ADCE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F61F9D8325E00F8900ADCE5D /* PokemonManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManagerTest.swift; sourceTree = "<group>"; };
+		F61F9D8325E00F8900ADCE5D /* PokemonListInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInteractorTest.swift; sourceTree = "<group>"; };
 		F61F9D9625E020A300ADCE5D /* PokemonDetailInteractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailInteractTest.swift; sourceTree = "<group>"; };
 		F625B3AB25D3215A00CF1001 /* PokemonCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F625B3AE25D3215A00CF1001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		F61F9D8925E0141300ADCE5D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				F61F9D8325E00F8900ADCE5D /* PokemonManagerTest.swift */,
+				F61F9D8325E00F8900ADCE5D /* PokemonListInteractorTest.swift */,
 				F61F9D9625E020A300ADCE5D /* PokemonDetailInteractTest.swift */,
 			);
 			path = Networking;
@@ -418,7 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F61F9D9725E020A300ADCE5D /* PokemonDetailInteractTest.swift in Sources */,
-				F61F9D8425E00F8900ADCE5D /* PokemonManagerTest.swift in Sources */,
+				F61F9D8425E00F8900ADCE5D /* PokemonListInteractorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,7 +652,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GNW9CWFWFK;
+				DEVELOPMENT_TEAM = UMWZTJUDU2;
 				INFOPLIST_FILE = PokemonCatalog/resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -674,7 +674,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GNW9CWFWFK;
+				DEVELOPMENT_TEAM = UMWZTJUDU2;
 				INFOPLIST_FILE = PokemonCatalog/resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (

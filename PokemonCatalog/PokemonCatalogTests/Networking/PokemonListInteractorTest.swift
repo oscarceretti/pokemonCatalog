@@ -1,5 +1,5 @@
 //
-//  PokemonManagerTest.swift
+//  PokemonListInteractorTest.swift
 //  PokemonCatalogTests
 //
 //  Created by Oscar Ceretti on 19/02/2021.
@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import PokemonCatalog
-class PokemonInteractorTest: XCTestCase {
+class PokemonListInteractorTest: XCTestCase {
     
     var sut: PokemonListInteractor!
     
