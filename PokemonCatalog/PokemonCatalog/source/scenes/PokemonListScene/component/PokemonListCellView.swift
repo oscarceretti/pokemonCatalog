@@ -15,6 +15,7 @@ class PokemonListCellView: UICollectionViewCell {
         $0.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         $0.textAlignment = .center
         $0.textColor = .black
+        $0.adjustsFontSizeToFitWidth = true
     }
     let pokemonImage = UIImageView(frame: .zero).then {
         $0.contentMode = .scaleAspectFill
@@ -41,7 +42,8 @@ class PokemonListCellView: UICollectionViewCell {
         pokemonName.translatesAutoresizingMaskIntoConstraints = false
         let nameConstraints = [
             pokemonName.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor,constant: 5),
-            pokemonName.centerXAnchor.constraint(equalTo: centerXAnchor),
+            pokemonName.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
+            pokemonName.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -10),
             pokemonName.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
         NSLayoutConstraint.activate(nameConstraints)
