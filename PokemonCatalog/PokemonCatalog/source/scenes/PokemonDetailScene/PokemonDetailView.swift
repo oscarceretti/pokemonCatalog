@@ -79,7 +79,7 @@ extension PokemonDetailView {
             statsCollection.leadingAnchor.constraint(equalTo: leadingAnchor),
             statsCollection.trailingAnchor.constraint(equalTo: trailingAnchor),
             statsCollection.heightAnchor.constraint(equalToConstant: 480),
-            statsCollection.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor)
+            statsCollection.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor, constant: -60)
         ]
         NSLayoutConstraint.activate(statsConstraints)
         
