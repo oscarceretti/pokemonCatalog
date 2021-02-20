@@ -46,8 +46,9 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
             sprites?.backShinyFemale,
             sprites?.frontFemale,
             sprites?.frontShiny,
-            sprites?.frontShinyFemale
-            
+            sprites?.frontShinyFemale,
+            sprites?.other?.dreamWorld?.frontDefault,
+            sprites?.other?.dreamWorld?.frontFemale
         ]
         var pokemonImages:[String] = []
         for image in pokemonOptionalImages  {
