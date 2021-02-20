@@ -36,9 +36,15 @@ final class PokemonCaruselView: UIView, UICollectionViewDelegate, UICollectionVi
         collectionView!.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(collectionView!)
-        collectionView!.snp.makeConstraints { (make) in
-            make.top.bottom.leading.trailing.equalTo(self)
-        }
+        collectionView!.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            collectionView!.topAnchor.constraint(equalTo: topAnchor),
+            collectionView!.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView!.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView!.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
         collectionView?.backgroundView = UIView(frame: collectionView!.bounds)
         collectionView!.backgroundColor = .white
         

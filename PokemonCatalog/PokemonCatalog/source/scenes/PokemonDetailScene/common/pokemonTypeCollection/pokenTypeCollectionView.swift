@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import SnapKit
+
 final class PokenTypeCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView : UICollectionView?
@@ -36,9 +36,15 @@ final class PokenTypeCollectionView: UIView, UICollectionViewDelegate, UICollect
         collectionView!.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(collectionView!)
-        collectionView!.snp.makeConstraints { (make) in
-            make.top.bottom.leading.trailing.equalTo(self)
-        }
+        collectionView!.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            collectionView!.topAnchor.constraint(equalTo: topAnchor),
+            collectionView!.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView!.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView!.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
         collectionView?.backgroundView = UIView(frame: collectionView!.bounds)
         collectionView!.backgroundColor = .clear
         

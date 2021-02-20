@@ -23,10 +23,17 @@ class PokemonTypeCollectionViewCell: UICollectionViewCell {
     }
     
     func setupViews(){
+
         self.addSubview(pokemonImage)
-        self.pokemonImage.snp.remakeConstraints { (make) in
-            make.edges.equalTo(self)
-        }
+        pokemonImage.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            pokemonImage.topAnchor.constraint(equalTo: topAnchor),
+            pokemonImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pokemonImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pokemonImage.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
         self.backgroundColor = .clear
     }
     

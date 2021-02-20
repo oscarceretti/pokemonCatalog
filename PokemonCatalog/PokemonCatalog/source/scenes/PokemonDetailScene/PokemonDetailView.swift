@@ -66,7 +66,7 @@ extension PokemonDetailView {
         typesCollection.translatesAutoresizingMaskIntoConstraints = false
         let typesConstraints = [
             typesCollection.topAnchor.constraint(equalTo: pokemonCarusel.topAnchor, constant: 20),
-            typesCollection.widthAnchor.constraint(equalTo: widthAnchor,multiplier: 0.15),
+            typesCollection.widthAnchor.constraint(equalToConstant: 50),
             typesCollection.heightAnchor.constraint(equalTo: pokemonCarusel.heightAnchor),
             typesCollection.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ]
@@ -82,9 +82,6 @@ extension PokemonDetailView {
             statsCollection.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor)
         ]
         NSLayoutConstraint.activate(statsConstraints)
-        
-        
-
         
     }
     

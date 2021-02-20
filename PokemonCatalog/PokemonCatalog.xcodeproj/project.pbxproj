@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,7 +42,6 @@
 		F6E45DA125DFAD3E0044FF4A /* PokemonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E45DA025DFAD3E0044FF4A /* PokemonEntity.swift */; };
 		F6E5CDFC25D59FB700B2B7AA /* AppDependecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CDFB25D59FB700B2B7AA /* AppDependecies.swift */; };
 		F6E5CE0225D5A00A00B2B7AA /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE0125D5A00A00B2B7AA /* CompositionRoot.swift */; };
-		F6E5CE0825D5AC1C00B2B7AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F6E5CE0725D5AC1C00B2B7AA /* SnapKit */; };
 		F6E5CE1125D5AC5C00B2B7AA /* PokemonListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1025D5AC5C00B2B7AA /* PokemonListCollectionView.swift */; };
 		F6E5CE1625D5ACEF00B2B7AA /* PokemonListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1525D5ACEF00B2B7AA /* PokemonListCellView.swift */; };
 		F6E5CE1C25D5AF3900B2B7AA /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5CE1B25D5AF3900B2B7AA /* Then.swift */; };
@@ -115,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6E5CE0825D5AC1C00B2B7AA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +355,6 @@
 			);
 			name = PokemonCatalog;
 			packageProductDependencies = (
-				F6E5CE0725D5AC1C00B2B7AA /* SnapKit */,
 			);
 			productName = PokemonCatalog;
 			productReference = F625B3AB25D3215A00CF1001 /* PokemonCatalog.app */;
@@ -392,7 +389,6 @@
 			);
 			mainGroup = F625B3A225D3215A00CF1001;
 			packageReferences = (
-				F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = F625B3AC25D3215A00CF1001 /* Products */;
 			projectDirPath = "";
@@ -732,25 +728,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		F6E5CE0725D5AC1C00B2B7AA /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F6E5CE0625D5AC1C00B2B7AA /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F625B3A325D3215A00CF1001 /* Project object */;
 }

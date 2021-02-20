@@ -30,18 +30,23 @@ class PokemonListCellView: UICollectionViewCell {
         self.addSubview(pokemonName)
         self.addSubview(pokemonImage)
        
-        self.pokemonImage.snp.remakeConstraints { (make) in
-            make.top.equalTo(self)
-            make.centerX.equalTo(self)
-            make.width.height.equalTo(100)
-        }
+        pokemonImage.translatesAutoresizingMaskIntoConstraints = false
+        let imageConstraints = [
+            pokemonImage.topAnchor.constraint(equalTo: topAnchor),
+            pokemonImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+            pokemonImage.heightAnchor.constraint(equalToConstant: 100),
+            pokemonImage.widthAnchor.constraint(equalToConstant: 100)
+        ]
+        NSLayoutConstraint.activate(imageConstraints)
         
-        self.pokemonName.snp.remakeConstraints { (make) in
-            make.top.equalTo(pokemonImage.snp.bottom).offset(5)
-            make.leading.equalTo(self).offset(20)
-            make.trailing.equalTo(self).offset(-20)
-            make.bottom.equalTo(self)
-        }
+        pokemonName.translatesAutoresizingMaskIntoConstraints = false
+        let nameConstraints = [
+            pokemonName.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor,constant: 5),
+            pokemonName.centerXAnchor.constraint(equalTo: centerXAnchor),
+            pokemonName.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(nameConstraints)
+        
         self.backgroundColor = .white
         self.layer.cornerRadius = 20
         self.elevate(elevation:3)

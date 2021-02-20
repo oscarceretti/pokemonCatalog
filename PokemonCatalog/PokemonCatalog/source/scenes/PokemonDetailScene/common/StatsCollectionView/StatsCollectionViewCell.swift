@@ -34,24 +34,34 @@ class StatsCollectionViewCell: UICollectionViewCell {
     }
     
     func setupViews(){
+        
         addSubview(statName)
-        statName.snp.remakeConstraints { (make) in
-            make.leading.equalTo(self).offset(40)
-            make.top.equalTo(self).offset(10)
-        }
+        statName.translatesAutoresizingMaskIntoConstraints = false
+        let nameConstraints = [
+            statName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
+            statName.topAnchor.constraint(equalTo: topAnchor,constant: 10),
+        ]
+        NSLayoutConstraint.activate(nameConstraints)
+        
+
         addSubview(statValue)
-        statValue.snp.remakeConstraints { (make) in
-            make.leading.equalTo(statName.snp.trailing).offset(10)
-            make.centerY.equalTo(statName)
-        }
+        statValue.translatesAutoresizingMaskIntoConstraints = false
+        let valueConstraints = [
+            statValue.leadingAnchor.constraint(equalTo: statName.trailingAnchor, constant: 10),
+            statValue.centerYAnchor.constraint(equalTo: statName.centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(valueConstraints)
         
         addSubview(progressView)
-        progressView.snp.remakeConstraints { (make) in
-            make.leading.equalTo(self).offset(40)
-            make.trailing.equalTo(self).offset(-40)
-            make.top.equalTo(statName.snp.bottom).offset(20)
-            make.bottom.equalTo(self).offset(-10)
-        }
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        let progressConstraints = [
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
+            progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+            progressView.topAnchor.constraint(equalTo: statName.bottomAnchor, constant: 20),
+            progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        ]
+        NSLayoutConstraint.activate(progressConstraints)
+
     }
     
     required init?(coder aDecoder: NSCoder) {
