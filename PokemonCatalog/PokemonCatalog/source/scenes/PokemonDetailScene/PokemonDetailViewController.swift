@@ -18,10 +18,17 @@ class PokemonDetailViewController: UIViewController {
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
         self.view.addSubview(mainView)
-        mainView.snp.remakeConstraints { (make) in
-            make.edges.equalTo(view)
-        }
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+
     }
     
     required init?(coder: NSCoder) {
@@ -38,42 +45,42 @@ class PokemonDetailViewController: UIViewController {
     
     func callToViewModelForUIUpdate() {
         
-        self.viewModel.bindPokemonNameToController = { name in
+        self.viewModel.bindPokemonNameToController = { [weak self] name in
             DispatchQueue.main.async {
-                self.mainView.pokemonName.text = name
+                self?.mainView.pokemonName.text = name
             }
         }
         
-        self.viewModel.bindPokemonImagesToController = { sprites in
+        self.viewModel.bindPokemonImagesToController = { [weak self] sprites in
             DispatchQueue.main.async {
-                self.mainView.pokemonCarusel.datasource = sprites
-                self.mainView.pokemonCarusel.collectionView?.reloadData()
+                self?.mainView.pokemonCarusel.datasource = sprites
+                self?.mainView.pokemonCarusel.collectionView?.reloadData()
             }
         }
         
-        self.viewModel.bindPokemonStatToController = { stats in
+        self.viewModel.bindPokemonStatToController = { [weak self] stats in
             DispatchQueue.main.async {
-                self.mainView.statsCollection.datasource = stats
-                self.mainView.statsCollection.collectionView?.reloadData()
+                self?.mainView.statsCollection.datasource = stats
+                self?.mainView.statsCollection.collectionView?.reloadData()
                 
             }
         }
         
-        self.viewModel.bindPokemonTypeToController = { types in
+        self.viewModel.bindPokemonTypeToController = { [weak self] types in
             DispatchQueue.main.async {
-                self.mainView.typesCollection.datasource = types
-                self.mainView.typesCollection.collectionView?.reloadData()
+                self?.mainView.typesCollection.datasource = types
+                self?.mainView.typesCollection.collectionView?.reloadData()
             }
         }
         
-        self.viewModel.bindErrorViewModelToController = {error in
+        self.viewModel.bindErrorViewModelToController = { [weak self] error in
             DispatchQueue.main.async {
                 let alert = UIAlertController(title: "Ops", message: error, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                     alert.dismiss(animated: true)
                 })
                 alert.addAction(action)
-                self.present(alert, animated: true)
+                self?.present(alert, animated: true)
             }
         }
         

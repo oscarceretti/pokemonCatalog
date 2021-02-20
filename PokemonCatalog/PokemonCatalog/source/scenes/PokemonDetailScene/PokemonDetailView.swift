@@ -31,37 +31,60 @@ final class PokemonDetailView: UIView {
 extension PokemonDetailView {
     
     func setLayout(){
-        addSubview(scrollview)
-        scrollview.snp.remakeConstraints { (make) in
-            make.edges.equalTo(self.safeAreaInsets)
-            
-        }
+        
+        self.addSubview(scrollview)
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        let scrollConstraints = [
+            scrollview.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(scrollConstraints)
+        
         scrollview.addSubview(pokemonName)
-        pokemonName.snp.remakeConstraints { (make) in
-            make.top.equalTo(scrollview).offset(20)
-            make.leading.equalTo(self).offset(45)
-            make.trailing.equalTo(self).offset(-45)
-        }
+        pokemonName.translatesAutoresizingMaskIntoConstraints = false
+        let nameConstraints = [
+            pokemonName.topAnchor.constraint(equalTo: scrollview.topAnchor, constant: 20),
+            pokemonName.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor, constant: 40),
+            pokemonName.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor, constant: -45)
+        ]
+        NSLayoutConstraint.activate(nameConstraints)
+        
         scrollview.addSubview(pokemonCarusel)
-        pokemonCarusel.snp.remakeConstraints { (make) in
-            make.top.equalTo(pokemonName.snp.bottom).offset(20)
-            make.width.height.equalTo(self.snp.width)
-        }
+        pokemonCarusel.translatesAutoresizingMaskIntoConstraints = false
+        let caruselConstraints = [
+            pokemonCarusel.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 20),
+            pokemonCarusel.widthAnchor.constraint(equalTo: widthAnchor),
+            pokemonCarusel.heightAnchor.constraint(equalTo: widthAnchor)
+        ]
+        NSLayoutConstraint.activate(caruselConstraints)
+        
+        
+
         scrollview.addSubview(typesCollection)
-        typesCollection.snp.remakeConstraints { (make) in
-            make.top.equalTo(pokemonCarusel.snp.top).offset(20)
-            make.trailing.equalTo(self).offset(-10)
-            make.width.equalTo(50)
-            make.height.equalTo(self.pokemonCarusel.snp.height)
-        }
+        typesCollection.translatesAutoresizingMaskIntoConstraints = false
+        let typesConstraints = [
+            typesCollection.topAnchor.constraint(equalTo: pokemonCarusel.topAnchor, constant: 20),
+            typesCollection.widthAnchor.constraint(equalTo: widthAnchor,multiplier: 0.15),
+            typesCollection.heightAnchor.constraint(equalTo: pokemonCarusel.heightAnchor),
+            typesCollection.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ]
+        NSLayoutConstraint.activate(typesConstraints)
+
         scrollview.addSubview(statsCollection)
-        statsCollection.snp.remakeConstraints { (make) in
-            make.top.equalTo(pokemonCarusel.snp.bottom).offset(20)
-            make.leading.trailing.equalTo(scrollview)
-            make.width.equalTo(self)
-            make.height.equalTo(480)
-            make.bottom.equalTo(scrollview).offset(-60)
-        }
+        statsCollection.translatesAutoresizingMaskIntoConstraints = false
+        let statsConstraints = [
+            statsCollection.topAnchor.constraint(equalTo: pokemonCarusel.bottomAnchor, constant: 20),
+            statsCollection.leadingAnchor.constraint(equalTo: leadingAnchor),
+            statsCollection.trailingAnchor.constraint(equalTo: trailingAnchor),
+            statsCollection.heightAnchor.constraint(equalToConstant: 480),
+            statsCollection.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(statsConstraints)
+        
+        
+
         
     }
     
