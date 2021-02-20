@@ -10,7 +10,7 @@ import XCTest
 class PokemonListInteractorTest: XCTestCase {
     
     var sut: PokemonListInteractor!
-    
+    var otherSut: PokemonManager!
     override func setUp() {
         super.setUp()
         sut = PokemonListInteractor(dependencies: AppDependencies())
@@ -24,7 +24,6 @@ class PokemonListInteractorTest: XCTestCase {
     func test_get_list() {
         var receivedPokemons: [PokemonEntity]? = nil
         var receivedError: String? = nil
-        
         sut.getPokemonEntity { (pokemons, error) in
             receivedPokemons = pokemons
             receivedError = error

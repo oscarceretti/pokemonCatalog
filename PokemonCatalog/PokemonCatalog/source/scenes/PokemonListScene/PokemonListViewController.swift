@@ -56,7 +56,7 @@ class PokemonListViewController: UIViewController {
         pokemonList.delegate = self
         callToViewModelForUIUpdate()
         self.viewModel.callFuncToGetPokemonList()
-        
+        self.title = "Lista"
     }
     
     
@@ -96,8 +96,8 @@ class PokemonListViewController: UIViewController {
 }
 
 extension PokemonListViewController: PokemonListCollectionViewDelegate {
-    func openDetail(urlString: String) {
-        self.router.openPokemonDetail(from: self, pokemonUrl: urlString)
+    func openDetail(pokemonName: String) {
+        self.router.openPokemonDetail(from: self, pokemonName: pokemonName)
     }
     
     func askForMore() {

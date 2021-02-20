@@ -14,18 +14,18 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
     
     typealias Dependencies = HasPokemonManager
     let dependencies: Dependencies
-    let pokemonUrl: String
+    let pokemonName: String
     private var pokeData: PokemonList?
     
-    init (dependencies: Dependencies, pokemonUrl: String) {
+    init (dependencies: Dependencies, pokemonName: String) {
         self.dependencies = dependencies
-        self.pokemonUrl = pokemonUrl
+        self.pokemonName = pokemonName
     }
     
     deinit{}
     
     func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], String?) -> ()) {
-        self.dependencies.pokemonManager.getPokemonDetail(urlString: "https://pokeapi.co/api/v2/pokemon/\(pokemonUrl)" ) { (pokemonDetail, error) in
+        self.dependencies.pokemonManager.getPokemonDetail(pokemonName: "https://pokeapi.co/api/v2/pokemon/\(pokemonName)" ) { (pokemonDetail, error) in
 
             completion(
                 pokemonDetail?.name,

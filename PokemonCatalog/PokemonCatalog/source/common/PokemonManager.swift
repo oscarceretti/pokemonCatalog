@@ -6,16 +6,16 @@
 //
 
 import Foundation
+import Network
 protocol HasPokemonManager {
     var pokemonManager: PokemonManagerProtocol { get }
 }
 
 protocol PokemonManagerProtocol {
     func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ())
-    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail?, Error?) -> ())
+    func getPokemonDetail(pokemonName: String,completion: @escaping (PokemonDetail?, Error?) -> ())
 }
 class PokemonManager: NSObject, PokemonManagerProtocol{
-    
     
     func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ()) {
         var sourceURL: URL?
@@ -37,12 +37,12 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 completion(nil, error)
                 debugPrint(error.localizedDescription)
             }
-
+            
         }.resume()
     }
     
-    func getPokemonDetail(urlString: String,completion: @escaping (PokemonDetail?, Error?) -> ()) {
-        let sourceURL = URL(string: urlString)
+    func getPokemonDetail(pokemonName: String,completion: @escaping (PokemonDetail?, Error?) -> ()) {
+        let sourceURL = URL(string: pokemonName)
         guard let url = sourceURL else { return }
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
             do {
@@ -55,7 +55,6 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 // TO-DO: Handle error
                 completion(nil, error)
             }
-   
         }.resume()
     }
     

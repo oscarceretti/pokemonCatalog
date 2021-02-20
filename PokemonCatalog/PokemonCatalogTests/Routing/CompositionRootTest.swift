@@ -29,7 +29,7 @@ class CompositionRootTest: XCTestCase {
     
     func test_build_pokemon_detail_scene() {
         var vc: PokemonDetailViewController
-        vc = sut.buildPokemonDetailScene(urlString: "ditto")
+        vc = sut.buildPokemonDetailScene(pokemonName: "ditto")
         XCTAssertTrue(vc.isKind(of: PokemonDetailViewController.self))
     }
     

@@ -33,7 +33,7 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
                 for pokemon in data.results {
                     myGroup.enter()
 
-                    self.dependencies.pokemonManager.getPokemonDetail(urlString: pokemon.url) { (pokemonDetail, error) in
+                    self.dependencies.pokemonManager.getPokemonDetail(pokemonName: pokemon.url) { (pokemonDetail, error) in
                         if let detail = pokemonDetail {
                             var sprite: String = ""
                             if let front = detail.sprites?.frontDefault {

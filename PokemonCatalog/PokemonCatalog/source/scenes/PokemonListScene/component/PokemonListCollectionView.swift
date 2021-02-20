@@ -10,7 +10,7 @@ import UIKit
 
 protocol PokemonListCollectionViewDelegate: class {
     func askForMore()
-    func openDetail(urlString: String)
+    func openDetail(pokemonName: String)
 }
 
 final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -101,7 +101,7 @@ final class PokemonListCollectionView: UIView, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
-        self.delegate?.openDetail(urlString: datasource[indexPath.row].name)
+        self.delegate?.openDetail(pokemonName: datasource[indexPath.row].name)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

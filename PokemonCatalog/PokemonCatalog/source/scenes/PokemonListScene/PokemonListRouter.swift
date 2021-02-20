@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 protocol PokemonListRouterProtocol {
-    func openPokemonDetail(from: UIViewController, pokemonUrl: String)
+    func openPokemonDetail(from: UIViewController, pokemonName: String)
 }
 final class PokemonListRouter: PokemonListRouterProtocol {
 
@@ -20,8 +20,8 @@ final class PokemonListRouter: PokemonListRouterProtocol {
         self.sceneFactory = sceneFactory
     }
     
-    func openPokemonDetail(from: UIViewController, pokemonUrl: String) {
-        let vc = self.sceneFactory.buildPokemonDetailScene(urlString: pokemonUrl)
+    func openPokemonDetail(from: UIViewController, pokemonName: String) {
+        let vc = self.sceneFactory.buildPokemonDetailScene(pokemonName: pokemonName)
         from.navigationController?.pushViewController(vc, animated: true)
     }
     

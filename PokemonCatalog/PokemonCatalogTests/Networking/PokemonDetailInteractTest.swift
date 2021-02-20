@@ -13,7 +13,7 @@ class PokemonDetailInteractorTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sut = PokemonDetailInteractor(dependencies: AppDependencies(), pokemonUrl: "ditto")
+        sut = PokemonDetailInteractor(dependencies: AppDependencies(), pokemonName: "ditto")
     }
 
     override func tearDown() {

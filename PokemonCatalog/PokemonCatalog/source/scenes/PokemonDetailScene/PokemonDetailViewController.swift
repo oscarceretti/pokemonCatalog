@@ -21,7 +21,7 @@ class PokemonDetailViewController: UIViewController {
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
+        self.title = "Dettaglio"
         self.view.addSubview(mainView)
         mainView.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [

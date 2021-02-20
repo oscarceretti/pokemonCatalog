@@ -7,12 +7,9 @@
 
 import UIKit
 
-import UIKit
-
 @available(iOS 11.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
-
     @nonobjc let window = UIWindow(frame: UIScreen.main.bounds)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
