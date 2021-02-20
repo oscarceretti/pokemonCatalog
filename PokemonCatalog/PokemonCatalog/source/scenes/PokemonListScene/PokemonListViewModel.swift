@@ -27,18 +27,30 @@ class PokemonListViewModel: NSObject {
         }
     }
     
+    private(set) var loading: Bool? {
+        didSet {
+            guard let loading = self.loading else { return }
+            self.bindLoadingViewModelToController(loading)
+        }
+    }
+    
     var bindPokemonListViewModelToController : (_ datasource: [PokemonEntity]) -> () = { _ in }
     var bindErrorViewModelToController : (_ error: String) -> () = {_ in}
+    var bindLoadingViewModelToController : (_ loading: Bool) -> () = { _ in }
 
     init (interactor: PokemonListInteractorInterface) {
         self.interactor = interactor
     }
 
     func callFuncToGetPokemonList() {
+        
+        self.loading = true
         self.interactor.getPokemonEntity(){ (pokemonList,error) in
             self.pokeDatasource = pokemonList
             self.error = error
+            self.loading = false
         }
+        
     }
 
 }

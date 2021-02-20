@@ -44,11 +44,19 @@ class PokemonDetailViewModel: NSObject {
         }
     }
     
+    private(set) var loading: Bool? {
+        didSet {
+            guard let loading = self.loading else { return }
+            self.bindLoadingViewModelToController(loading)
+        }
+    }
+    
     var bindPokemonNameToController : (_ name: String) -> () = { _ in}
     var bindPokemonImagesToController : (_ sprites: [String]) -> () = { _ in }
     var bindPokemonStatToController : (_ stats: [PokemonStatEntity]) -> () = { _ in }
     var bindPokemonTypeToController : (_ type: [Asset]) -> () = { _ in }
     var bindErrorViewModelToController : (_ error: String) -> () = { _ in }
+    var bindLoadingViewModelToController : (_ loading: Bool) -> () = { _ in }
     
     init (interactor: PokemonDetailInteractorInterface) {
         self.interactor = interactor
@@ -56,9 +64,11 @@ class PokemonDetailViewModel: NSObject {
     
 
     func callFuncToGetPokemonDetail() {
+        self.loading = true
         self.interactor.getPokemonDetail() { (pokemonName,pokemonImages,statsArray,types,error) in
             
-
+            self.loading = false
+            
             self.pokemonName = pokemonName
             
             self.pokemonImages = pokemonImages

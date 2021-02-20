@@ -14,6 +14,10 @@ class PokemonListViewController: UIViewController {
     private let router: PokemonListRouter
     
     private var pokemonList = PokemonListCollectionView(datasource: [])
+    private var activityIndicator = UIActivityIndicatorView(style: .white).then {
+        $0.backgroundColor = .systemBlue
+        $0.layer.cornerRadius = 20
+    }
     
     init(viewModel: PokemonListViewModel, router: PokemonListRouter) {
         self.viewModel = viewModel
@@ -30,7 +34,17 @@ class PokemonListViewController: UIViewController {
             pokemonList.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-
+        
+        self.view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        let activityConstraints = [
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 50)
+        ]
+        NSLayoutConstraint.activate(activityConstraints)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +56,7 @@ class PokemonListViewController: UIViewController {
         pokemonList.delegate = self
         callToViewModelForUIUpdate()
         self.viewModel.callFuncToGetPokemonList()
-
+        
     }
     
     
@@ -66,6 +80,17 @@ class PokemonListViewController: UIViewController {
             }
         }
         
+        self.viewModel.bindLoadingViewModelToController = { [weak self] loading in
+            DispatchQueue.main.async {
+                self?.pokemonList.isUserInteractionEnabled = !loading
+                if loading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
+        
     }
     
 }
@@ -82,18 +107,3 @@ extension PokemonListViewController: PokemonListCollectionViewDelegate {
     
 }
 
-extension UIView {
-
-    /// Returns a collection of constraints to anchor the bounds of the current view to the given view.
-    ///
-    /// - Parameter view: The view to anchor to.
-    /// - Returns: The layout constraints needed for this constraint.
-    func constraintsForAnchoringTo(boundsOf view: UIView) -> [NSLayoutConstraint] {
-        return [
-            topAnchor.constraint(equalTo: view.topAnchor),
-            leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ]
-    }
-}

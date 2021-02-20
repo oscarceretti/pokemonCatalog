@@ -7,13 +7,16 @@
 
 import Foundation
 import UIKit
-import SnapKit
+
 
 class PokemonDetailViewController: UIViewController {
     
     private var viewModel: PokemonDetailViewModel
     private var mainView = PokemonDetailView()
-    
+    private var activityIndicator = UIActivityIndicatorView(style: .white).then {
+        $0.backgroundColor = .systemBlue
+        $0.layer.cornerRadius = 20
+    }
     
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {
         self.viewModel = viewModel
@@ -28,6 +31,16 @@ class PokemonDetailViewController: UIViewController {
             mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+        
+        self.view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        let activityConstraints = [
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 50)
+        ]
+        NSLayoutConstraint.activate(activityConstraints)
 
     }
     
@@ -81,6 +94,16 @@ class PokemonDetailViewController: UIViewController {
                 })
                 alert.addAction(action)
                 self?.present(alert, animated: true)
+            }
+        }
+        
+        self.viewModel.bindLoadingViewModelToController = { [weak self] loading in
+            DispatchQueue.main.async {
+                if loading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         }
         

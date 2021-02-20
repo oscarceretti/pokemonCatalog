@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
 protocol PokemonListCollectionViewDelegate: class {
     func askForMore()
