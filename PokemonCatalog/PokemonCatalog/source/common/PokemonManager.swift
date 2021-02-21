@@ -6,7 +6,10 @@
 //
 
 import Foundation
-import Network
+import SystemConfiguration
+enum MyError: Error {
+    case network
+}
 protocol HasPokemonManager {
     var pokemonManager: PokemonManagerProtocol { get }
 }
@@ -17,7 +20,17 @@ protocol PokemonManagerProtocol {
 }
 class PokemonManager: NSObject, PokemonManagerProtocol{
     
+    
+    override init() {
+        super.init()
+        
+    }
     func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ()) {
+        
+        RechabilityHandler().start { (rechability) in
+            guard  rechability == true else { return completion(nil, MyError.network) }
+        }
+        
         var sourceURL: URL?
         if let nextString = next {
             sourceURL = URL(string: nextString)
@@ -33,15 +46,18 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                     completion(pokeData, nil)
                 }
             }catch {
-                // TO-DO: Handle error
                 completion(nil, error)
-                debugPrint(error.localizedDescription)
             }
             
         }.resume()
     }
     
     func getPokemonDetail(pokemonName: String,completion: @escaping (PokemonDetail?, Error?) -> ()) {
+        
+        RechabilityHandler().start { (rechability) in
+            guard  rechability == true else { return completion(nil, MyError.network) }
+        }
+        
         let sourceURL = URL(string: pokemonName)
         guard let url = sourceURL else { return }
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
@@ -52,7 +68,6 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                     completion(pokeData,nil)
                 }
             }catch {
-                // TO-DO: Handle error
                 completion(nil, error)
             }
         }.resume()

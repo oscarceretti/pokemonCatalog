@@ -27,9 +27,10 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ()){
         var updatedPokemons: [PokemonEntity] = []
         self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { (pokemonList,error) in
+            guard error == nil else { return completion(nil, error?.localizedDescription) }
             let myGroup = DispatchGroup()
             self.pokeData = pokemonList
-            if let data = pokemonList {
+            if let data = pokemonList, data.results.count > 0 {
                 for pokemon in data.results {
                     myGroup.enter()
 
