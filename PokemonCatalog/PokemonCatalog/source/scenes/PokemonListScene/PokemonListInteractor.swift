@@ -16,7 +16,7 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     let dependencies: Dependencies
     
     private var pokeData: PokemonList?
-    
+    private var totalCount: Int? = nil
     init (dependencies: Dependencies) {
         self.dependencies = dependencies
     }
@@ -27,39 +27,49 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ()){
         var updatedPokemons: [PokemonEntity] = []
         self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { (pokemonList,error) in
-            let myGroup = DispatchGroup()
-            self.pokeData = pokemonList
-            if let data = pokemonList {
-                for pokemon in data.results {
-                    myGroup.enter()
+            guard error == nil else { return completion(nil, error?.localizedDescription) }
+            if self.totalCount == nil { self.totalCount = pokemonList?.count }
+            if let total = self.totalCount, total > 0 {
+                let myGroup = DispatchGroup()
+                self.pokeData = pokemonList
+                if let data = pokemonList, data.results.count > 0 {
+                    for pokemon in data.results {
+                        myGroup.enter()
 
-                    self.dependencies.pokemonManager.getPokemonDetail(pokemonName: pokemon.url) { (pokemonDetail, error) in
-                        if let detail = pokemonDetail {
-                            var sprite: String = ""
-                            if let front = detail.sprites?.frontDefault {
-                                sprite = front
-                            } else if let frontShiny = detail.sprites?.frontShiny{
-                                sprite = frontShiny
-                            } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
-                                sprite = official
+                        self.dependencies.pokemonManager.getPokemonDetail(pokemonName: pokemon.url) { (pokemonDetail, error) in
+                            if let detail = pokemonDetail {
+                                var sprite: String = ""
+                                if let front = detail.sprites?.frontDefault {
+                                    sprite = front
+                                } else if let frontShiny = detail.sprites?.frontShiny{
+                                    sprite = frontShiny
+                                } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
+                                    sprite = official
+                                }
+                                let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
+                                if !sprite.isEmpty{
+                                    updatedPokemons.append(newPokemonData)
+                                }
+                                myGroup.leave()
+                                
+                                self.totalCount! -= 1
+                            }else {
+                                self.totalCount! -= 1
+                                myGroup.leave()
                             }
-                            let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
-                            if !sprite.isEmpty{
-                                updatedPokemons.append(newPokemonData)
-                            }
-                            myGroup.leave()
-                        }else {
-                            myGroup.leave()
+                            
                         }
                         
                     }
-                    
+                   
+                    myGroup.notify(queue: .main) {
+                        debugPrint("Pokemon left = \(self.totalCount)")
+                        completion(updatedPokemons,error?.localizedDescription)
+                    }
+                }else {
+                    completion(nil,nil)
                 }
-               
-                myGroup.notify(queue: .main) {
-                    completion(updatedPokemons,error?.localizedDescription)
-                }
-                
+            
             }else {
                 completion(nil,error?.localizedDescription)
             }
