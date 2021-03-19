@@ -52,8 +52,9 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
                                     } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
                                         sprite = official
                                     }
-                                    let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
-                                    if !sprite.isEmpty{
+                                    
+                                    if !sprite.isEmpty, let url = URL(string: sprite){
+                                        let newPokemonData = PokemonEntity(name: pokemon.name, sprite: url)
                                         updatedPokemons.append(newPokemonData)
                                     }
                                     myGroup.leave()

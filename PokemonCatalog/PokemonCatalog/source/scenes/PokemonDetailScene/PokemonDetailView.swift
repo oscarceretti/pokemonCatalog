@@ -40,8 +40,8 @@ extension PokemonDetailView {
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         let scrollConstraints = [
             scrollview.topAnchor.constraint(equalTo: self.topAnchor),
-            scrollview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollview.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollview.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             scrollview.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ]
         NSLayoutConstraint.activate(scrollConstraints)

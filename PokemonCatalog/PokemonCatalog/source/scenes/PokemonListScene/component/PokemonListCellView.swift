@@ -47,8 +47,7 @@ class PokemonListCellView: UICollectionViewCell {
         pokemonName.translatesAutoresizingMaskIntoConstraints = false
         let nameConstraints = [
             pokemonName.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor,constant: 5),
-            pokemonName.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
-            pokemonName.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -10),
+            pokemonName.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             pokemonName.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
         NSLayoutConstraint.activate(nameConstraints)

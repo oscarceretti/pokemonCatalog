@@ -8,9 +8,9 @@
 import Foundation
 struct PokemonEntity {
     let name: String
-    let sprite: String
+    let sprite: URL
     
-    init(name:String, sprite: String) {
+    init(name:String, sprite: URL) {
         self.name = name
         self.sprite = sprite
     }
