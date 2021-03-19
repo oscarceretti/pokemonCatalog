@@ -10,21 +10,27 @@ import UIKit
 
 class StatsCollectionViewCell: UICollectionViewCell {
     
-    static let cellId = "__"
+    static let cellId = "StatsCollectionViewCell__"
 
-    var statName = UILabel(frame: .zero).then {
-        $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.textColor = .black
+    var statName = UILabel(frame: .zero) {
+        didSet {
+            statName.textAlignment = .left
+            statName.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+            statName.textColor = .black
+        }
     }
-    var statValue = UILabel(frame: .zero).then {
-        $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        $0.textColor = .black
+    var statValue = UILabel(frame: .zero) {
+        didSet {
+            statValue.textAlignment = .left
+            statValue.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            statValue.textColor = .black
+        }
     }
-    var progressView = UIProgressView(frame: .zero).then {
-        $0.tintColor = UIColor.systemTeal
-        $0.progressViewStyle = .default
+    var progressView = UIProgressView(frame: .zero) {
+        didSet {
+            progressView.tintColor = UIColor.systemTeal
+            progressView.progressViewStyle = .default
+        }
     }
     
     override init(frame: CGRect) {

@@ -25,14 +25,21 @@ final class PokemonDetailInteractor: PokemonDetailInteractorInterface {
     deinit{}
     
     func getPokemonDetail(completion: @escaping (String?, [String], [PokemonStatEntity], [Asset], String?) -> ()) {
-        self.dependencies.pokemonManager.getPokemonDetail(pokemonName: "https://pokeapi.co/api/v2/pokemon/\(pokemonName)" ) { (pokemonDetail, error) in
+        self.dependencies.pokemonManager.getPokemonDetail(pokemonName: "https://pokeapi.co/api/v2/pokemon/\(pokemonName)" ) { (result) in
 
-            completion(
-                pokemonDetail?.name,
-                self.getImages(sprites: pokemonDetail?.sprites),
-                self.getStatDict(statsArray: pokemonDetail?.stats),
-                self.getTypes(types: pokemonDetail?.types),
-                error?.localizedDescription)
+            switch result {
+            
+            case .success(let pokemonDetail):
+                completion(
+                    pokemonDetail.name,
+                    self.getImages(sprites: pokemonDetail.sprites),
+                    self.getStatDict(statsArray: pokemonDetail.stats),
+                    self.getTypes(types: pokemonDetail.types), nil
+                    )
+            case .failure(let error):
+                completion (nil, [], [], [], error.localizedDescription)
+            }
+            
         }
     }
     

@@ -45,9 +45,15 @@ class PokemonListViewModel: NSObject {
     func callFuncToGetPokemonList() {
         
         self.loading = true
-        self.interactor.getPokemonEntity(){ (pokemonList,error) in
-            self.pokeDatasource = pokemonList
-            self.error = error
+        self.interactor.getPokemonEntity(){ (result) in
+            switch result {
+                
+            case .success(let pokemonList):
+                self.pokeDatasource = pokemonList
+            case .failure(let error):
+                self.error = error.localizedDescription
+            }
+        
             self.loading = false
         }
         

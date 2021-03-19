@@ -10,10 +10,14 @@ import UIKit
 
 final class PokemonDetailView: UIView {
     let scrollview = UIScrollView(frame: .zero)
-    let pokemonName = UILabel(frame: .zero).then {
-        $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        $0.textColor = .black
+    var pokemonName = UILabel(frame: .zero) {
+        
+        didSet {
+            pokemonName.textAlignment = .center
+            pokemonName.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+            pokemonName.textColor = .black
+        }
+        
     }
     let pokemonCarusel = PokemonCaruselView(datasource: [])
     let typesCollection = PokenTypeCollectionView(datasource: [])
@@ -35,10 +39,10 @@ extension PokemonDetailView {
         self.addSubview(scrollview)
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         let scrollConstraints = [
-            scrollview.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollview.topAnchor.constraint(equalTo: self.topAnchor),
             scrollview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             scrollview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            scrollview.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ]
         NSLayoutConstraint.activate(scrollConstraints)
         

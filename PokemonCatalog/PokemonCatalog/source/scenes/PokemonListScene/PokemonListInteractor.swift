@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonListInteractorInterface {
-    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ())
+    func getPokemonEntity(completion: @escaping (Result<[PokemonEntity]>) -> ())
 }
 
 final class PokemonListInteractor: PokemonListInteractorInterface {
@@ -24,55 +24,68 @@ final class PokemonListInteractor: PokemonListInteractorInterface {
     deinit{}
     
 
-    func getPokemonEntity(completion: @escaping ([PokemonEntity]?,String?) -> ()){
+    func getPokemonEntity(completion: @escaping (Result<[PokemonEntity]>) -> ()){
         var updatedPokemons: [PokemonEntity] = []
-        self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { (pokemonList,error) in
-            guard error == nil else { return completion(nil, error?.localizedDescription) }
-            if self.totalCount == nil { self.totalCount = pokemonList?.count }
-            if let total = self.totalCount, total > 0 {
-                let myGroup = DispatchGroup()
-                self.pokeData = pokemonList
-                if let data = pokemonList, data.results.count > 0 {
-                    for pokemon in data.results {
-                        myGroup.enter()
-
-                        self.dependencies.pokemonManager.getPokemonDetail(pokemonName: pokemon.url) { (pokemonDetail, error) in
-                            if let detail = pokemonDetail {
-                                var sprite: String = ""
-                                if let front = detail.sprites?.frontDefault {
-                                    sprite = front
-                                } else if let frontShiny = detail.sprites?.frontShiny{
-                                    sprite = frontShiny
-                                } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
-                                    sprite = official
-                                }
-                                let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
-                                if !sprite.isEmpty{
-                                    updatedPokemons.append(newPokemonData)
-                                }
-                                myGroup.leave()
+        self.dependencies.pokemonManager.getPokemonList(next: self.pokeData?.next) { result in
+            switch result {
+            
+            case .success(let pokemonList):
+                if self.totalCount == nil { self.totalCount = pokemonList.count }
+                if let total = self.totalCount, total > 0 {
+                    let myGroup = DispatchGroup()
+                    self.pokeData = pokemonList
+                    if pokemonList.results.count > 0 {
+                        for pokemon in pokemonList.results {
+                            myGroup.enter()
+                            
+                            self.dependencies.pokemonManager.getPokemonDetail(pokemonName: pokemon.url) { result in
                                 
-                                self.totalCount! -= 1
-                            }else {
-                                self.totalCount! -= 1
-                                myGroup.leave()
+                                switch result {
+                                
+                                case .success(let detail):
+                                    
+                                    var sprite: String = ""
+                                    if let front = detail.sprites?.frontDefault {
+                                        sprite = front
+                                    } else if let frontShiny = detail.sprites?.frontShiny{
+                                        sprite = frontShiny
+                                    } else if let official = detail.sprites?.other?.officialArtwork?.frontDefault {
+                                        sprite = official
+                                    }
+                                    let newPokemonData = PokemonEntity(name: pokemon.name, sprite: sprite)
+                                    if !sprite.isEmpty{
+                                        updatedPokemons.append(newPokemonData)
+                                    }
+                                    myGroup.leave()
+                                    
+                                    self.totalCount! -= 1
+                                    
+                                case .failure(let error):
+                                    self.totalCount! -= 1
+                                    myGroup.leave()
+                                }
+                                
                             }
                             
                         }
                         
-                    }
-                   
-                    myGroup.notify(queue: .main) {
+                        myGroup.notify(queue: .main) {
                         debugPrint("Pokemon left = \(self.totalCount)")
-                        completion(updatedPokemons,error?.localizedDescription)
+                            completion(.success(updatedPokemons))
+                        }
+                    }else {
+                        completion(.success([]))
                     }
+                    
                 }else {
-                    completion(nil,nil)
+                    completion(.success([]))
                 }
-            
-            }else {
-                completion(nil,error?.localizedDescription)
+                
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+                completion(.failure(error))
             }
+
         }
     }
     

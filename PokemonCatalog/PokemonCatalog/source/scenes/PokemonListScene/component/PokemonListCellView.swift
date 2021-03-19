@@ -11,15 +11,20 @@ import UIKit
 class PokemonListCellView: UICollectionViewCell {
     
     static let cellId = "pokemonListCellView__"
-    let pokemonName = UILabel(frame: .zero).then {
-        $0.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        $0.textAlignment = .center
-        $0.textColor = .black
-        $0.adjustsFontSizeToFitWidth = true
+    var pokemonName = UILabel(frame: .zero) {
+        didSet {
+            pokemonName.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+            pokemonName.textAlignment = .center
+            pokemonName.textColor = .black
+            pokemonName.adjustsFontSizeToFitWidth = true
+        }
     }
-    let pokemonImage = UIImageView(frame: .zero).then {
-        $0.contentMode = .scaleAspectFill
-        $0.clipsToBounds  = true
+    var pokemonImage = UIImageView(frame: .zero) {
+        didSet{
+            pokemonImage.contentMode = .scaleAspectFill
+            pokemonImage.clipsToBounds  = true
+        }
+        
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

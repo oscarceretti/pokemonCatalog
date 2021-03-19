@@ -13,9 +13,12 @@ class PokemonDetailViewController: UIViewController {
     
     private var viewModel: PokemonDetailViewModel
     private var mainView = PokemonDetailView()
-    private var activityIndicator = UIActivityIndicatorView(style: .white).then {
-        $0.backgroundColor = .systemBlue
-        $0.layer.cornerRadius = 20
+    private var activityIndicator = UIActivityIndicatorView(style: .white) {
+        didSet {
+            activityIndicator.backgroundColor = .systemBlue
+            activityIndicator.layer.cornerRadius = 20
+        }
+        
     }
     
     init(viewModel: PokemonDetailViewModel, router: PokemonDetailRouter) {

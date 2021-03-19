@@ -15,8 +15,8 @@ protocol HasPokemonManager {
 }
 
 protocol PokemonManagerProtocol {
-    func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ())
-    func getPokemonDetail(pokemonName: String,completion: @escaping (PokemonDetail?, Error?) -> ())
+    func getPokemonList(next: String?,completion: @escaping (Result<PokemonList>) -> ())
+    func getPokemonDetail(pokemonName: String,completion: @escaping (Result<PokemonDetail>) -> ())
 }
 class PokemonManager: NSObject, PokemonManagerProtocol{
     
@@ -25,10 +25,10 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
         super.init()
         
     }
-    func getPokemonList(next: String?,completion: @escaping (PokemonList?,Error?) -> ()) {
+    func getPokemonList(next: String?,completion: @escaping (Result<PokemonList>) -> ()) {
         
         RechabilityHandler().start { (rechability) in
-            guard  rechability == true else { return completion(nil, MyError.network) }
+            guard  rechability == true else { return completion(.failure(MyError.network)) }
         }
         
         var sourceURL: URL?
@@ -43,19 +43,19 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     let pokeData = try jsonDecoder.decode(PokemonList.self, from: data)
-                    completion(pokeData, nil)
+                    completion(.success(pokeData))
                 }
             }catch {
-                completion(nil, error)
+                completion(.failure(error))
             }
             
         }.resume()
     }
     
-    func getPokemonDetail(pokemonName: String,completion: @escaping (PokemonDetail?, Error?) -> ()) {
+    func getPokemonDetail(pokemonName: String,completion: @escaping (Result<PokemonDetail>) -> ()) {
         
         RechabilityHandler().start { (rechability) in
-            guard  rechability == true else { return completion(nil, MyError.network) }
+            guard  rechability == true else { return completion(.failure(MyError.network)) }
         }
         
         let sourceURL = URL(string: pokemonName)
@@ -65,10 +65,10 @@ class PokemonManager: NSObject, PokemonManagerProtocol{
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     let pokeData = try jsonDecoder.decode(PokemonDetail.self, from: data)
-                    completion(pokeData,nil)
+                    completion(.success(pokeData))
                 }
             }catch {
-                completion(nil, error)
+                completion(.failure(error))
             }
         }.resume()
     }

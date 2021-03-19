@@ -12,9 +12,11 @@ class PokemonTypeCollectionViewCell: UICollectionViewCell {
     
     static let cellId = "PokemonTypeCollectionViewCell__"
     
-    let pokemonImage = UIImageView(frame: .zero).then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds  = true
+    var pokemonImage = UIImageView(frame: .zero) {
+        didSet {
+            pokemonImage.contentMode = .scaleAspectFit
+            pokemonImage.clipsToBounds  = true
+        }
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

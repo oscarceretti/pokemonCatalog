@@ -14,9 +14,12 @@ class PokemonListViewController: UIViewController {
     private let router: PokemonListRouter
     
     private var pokemonList = PokemonListCollectionView(datasource: [])
-    private var activityIndicator = UIActivityIndicatorView(style: .white).then {
-        $0.backgroundColor = .systemBlue
-        $0.layer.cornerRadius = 20
+    private var activityIndicator = UIActivityIndicatorView(style: .white) {
+        didSet {
+            activityIndicator.backgroundColor = .systemBlue
+            activityIndicator.layer.cornerRadius = 20
+        }
+        
     }
     
     init(viewModel: PokemonListViewModel, router: PokemonListRouter) {
@@ -28,10 +31,10 @@ class PokemonListViewController: UIViewController {
         self.view.addSubview(pokemonList)
         pokemonList.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
-            pokemonList.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pokemonList.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            pokemonList.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            pokemonList.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            pokemonList.topAnchor.constraint(equalTo: view.topAnchor),
+            pokemonList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pokemonList.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pokemonList.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
         
